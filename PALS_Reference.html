@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PALS 2020 — Complete Reference</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1a1a1a;background:#f5f5f3;font-size:15px}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{background:#fff;border-bottom:1px solid #e5e5e3;padding:0 1.25rem;display:flex;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.nav-brand{font-size:15px;font-weight:600;padding:.75rem 0;margin-right:1.25rem;white-space:nowrap}
+.nav-brand span{color:#185FA5}
+.nav-tab{padding:.75rem .9rem;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#666;transition:all .2s;white-space:nowrap}
+.nav-tab.active{color:#185FA5;border-bottom-color:#185FA5}
+.nav-tab:hover{color:#1a1a1a}
+
+/* PAGES */
+.page{display:none;padding:1.5rem;max-width:940px;margin:0 auto}
+.page.active{display:block}
+
+/* INPUTS */
+.tabs{display:flex;border-bottom:1px solid #e5e5e3;margin-bottom:1.25rem}
+.tab{padding:.55rem 1rem;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#666;transition:all .2s}
+.tab.active{color:#185FA5;border-bottom-color:#185FA5}
+.panel{display:none}.panel.active{display:block}
+.input-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:12px;color:#666}
+.field input,.field select{padding:7px 10px;border:1px solid #ddd;border-radius:8px;font-size:14px;background:#fff;color:#1a1a1a;width:130px;outline:none}
+.field input:focus,.field select:focus{border-color:#185FA5}
+.clear-btn{padding:7px 12px;background:#fff;color:#666;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer}
+.info-bar{background:#f0f0ee;border-radius:8px;padding:9px 14px;font-size:13px;margin-bottom:1.25rem;display:none;line-height:1.6}
+.info-bar strong{color:#185FA5}
+
+/* SECTION LABEL */
+.sec-label{font-size:11px;font-weight:600;color:#888;letter-spacing:.05em;text-transform:uppercase;margin:1.2rem 0 .6rem;padding-bottom:4px;border-bottom:1px solid #e5e5e3}
+
+/* DOSE CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin-bottom:.5rem}
+.dc{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.85rem 1rem}
+.dc-cat{font-size:10px;font-weight:600;color:#aaa;text-transform:uppercase;margin-bottom:3px}
+.dc-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.dc-val{font-size:20px;font-weight:600;color:#185FA5}
+.dc-unit{font-size:11px;color:#888}
+.dc-note{font-size:11px;color:#aaa;margin-top:4px;border-top:1px solid #f0f0ee;padding-top:4px;line-height:1.4}
+.dc-red .dc-val{color:#A32D2D}.dc-amber .dc-val{color:#854F0B}.dc-green .dc-val{color:#3B6D11}.dc-teal .dc-val{color:#0F6E56}.dc-purple .dc-val{color:#534AB7}
+
+/* EMPTY */
+.empty{text-align:center;padding:2.5rem 1rem;color:#aaa;font-size:14px}
+
+/* HOME */
+.hero{background:#fff;border:1px solid #e5e5e3;border-left:4px solid #185FA5;border-radius:12px;padding:1.5rem;margin-bottom:1.25rem}
+.hero h1{font-size:22px;font-weight:600;margin-bottom:.4rem}
+.hero p{font-size:13px;color:#666;line-height:1.6}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
+.hc{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.9rem 1rem;cursor:pointer;transition:border-color .2s}
+.hc:hover{border-color:#185FA5}
+.hc-icon{font-size:18px;margin-bottom:6px;color:#185FA5}
+.hc h3{font-size:13px;font-weight:600;margin-bottom:3px}
+.hc p{font-size:11px;color:#888}
+.key-num{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:1rem}
+.kn{background:#f5f5f3;padding:8px 10px;border-radius:8px;font-size:12px}
+.kn strong{display:block;font-size:15px;color:#185FA5;margin-bottom:1px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600}
+.b-red{background:#FCEBEB;color:#791F1F}.b-blue{background:#E6F1FB;color:#0C447C}.b-amber{background:#FAEEDA;color:#633806}.b-green{background:#EAF3DE;color:#27500A}.b-purple{background:#EEEDFE;color:#3C3489}.b-teal{background:#E1F5EE;color:#085041}
+
+/* ALGORITHM */
+.algo-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem}
+.ab{padding:6px 14px;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;color:#666;transition:all .2s}
+.ab.active{background:#E6F1FB;color:#0C447C;border-color:#378ADD}
+.flowchart{display:flex;flex-direction:column;align-items:center;gap:0}
+.fc{width:100%;max-width:460px;padding:10px 18px;border-radius:10px;text-align:center;font-size:13px;font-weight:500}
+.fc-start{background:#E6F1FB;color:#0C447C;border:2px solid #378ADD;border-radius:22px}
+.fc-action{background:#fff;color:#1a1a1a;border:1px solid #ddd}
+.fc-critical{background:#FCEBEB;color:#791F1F;border:2px solid #E24B4A}
+.fc-drug{background:#EAF3DE;color:#27500A;border:1px solid #97C459;font-size:12px;font-weight:400}
+.fc-arr{font-size:20px;color:#bbb;line-height:1.2;margin:2px 0}
+.fc-branch{display:flex;width:100%;max-width:460px;gap:8px;margin:2px 0}
+.fc-bx{flex:1;padding:9px 10px;border-radius:10px;font-size:12px;text-align:center;font-weight:500}
+
+/* RHYTHMS */
+.rhy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.rc{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.9rem;cursor:pointer;transition:border-color .2s}
+.rc:hover{border-color:#185FA5}
+.rc-ecg{height:44px;margin:7px 0}
+.rc-detail{display:none;margin-top:8px;padding-top:8px;border-top:1px solid #f0f0ee;font-size:12px;line-height:1.7;color:#555}
+.rc.open .rc-detail{display:block}
+
+/* QUIZ */
+.qz{max-width:580px}
+.q-prog{font-size:13px;color:#888;margin-bottom:.4rem}
+.q-bar{background:#f0f0ee;border-radius:4px;height:4px;margin-bottom:1.25rem}
+.q-fill{background:#185FA5;height:4px;border-radius:4px;transition:width .3s}
+.q-text{font-size:15px;font-weight:500;line-height:1.6;margin-bottom:1.1rem}
+.q-opts{display:flex;flex-direction:column;gap:7px}
+.q-opt{padding:10px 14px;border:1px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;transition:all .2s;background:#fff}
+.q-opt:hover:not(.disabled){background:#f5f5f3}
+.q-opt.correct{background:#EAF3DE;color:#27500A;border-color:#639922}
+.q-opt.wrong{background:#FCEBEB;color:#791F1F;border-color:#E24B4A}
+.q-opt.disabled{cursor:default}
+.q-exp{margin-top:.9rem;padding:10px 14px;background:#E6F1FB;color:#0C447C;border-radius:8px;font-size:13px;line-height:1.6;display:none}
+.q-next{margin-top:.9rem;padding:7px 20px;border:1px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;background:#fff;display:none}
+.q-result{text-align:center;padding:2rem}
+.q-score{font-size:42px;font-weight:600;color:#185FA5;margin:.4rem 0}
+.q-restart{padding:7px 22px;border:1px solid #185FA5;border-radius:8px;cursor:pointer;font-size:13px;background:#fff;color:#185FA5;margin-top:1rem}
+
+/* DRIP */
+.drip-card{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.drip-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.drip-name{font-size:15px;font-weight:600}
+.drip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:7px}
+.drip-d{background:#f5f5f3;border-radius:8px;padding:7px 9px;text-align:center}
+.drip-dlbl{font-size:10px;color:#888;margin-bottom:2px}
+.drip-dval{font-size:16px;font-weight:600;color:#185FA5}
+.drip-dunit{font-size:10px;color:#aaa}
+.drip-note{font-size:11px;color:#aaa;margin-top:.5rem;padding-top:.5rem;border-top:1px solid #f0f0ee;line-height:1.5}
+
+/* BROSELOW */
+.brose-row{display:flex;align-items:center;padding:9px 12px;margin-bottom:6px;border:1px solid #e5e5e3;border-radius:10px;background:#fff;transition:opacity .2s}
+.brose-row.dim{opacity:.28}
+.brose-row.active-band{outline:2px solid #185FA5;outline-offset:-1px}
+.brose-color{width:16px;height:16px;border-radius:3px;margin-right:10px;flex-shrink:0}
+.brose-name{font-weight:600;font-size:13px}
+.brose-details{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.brose-details span{font-size:11px;color:#888}
+
+@media(max-width:600px){
+  .nav-tab{padding:.6rem .6rem;font-size:12px}
+  .nav-brand{margin-right:.5rem}
+  .page{padding:1rem}
+}
+@media print{
+  .nav{position:relative}
+  .page{display:block!important}
+  .page+.page{page-break-before:always}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand"><span>PALS</span> 2020</div>
+  <div class="nav-tab active" onclick="SP('home',this)">🏠</div>
+  <div class="nav-tab" onclick="SP('algo',this)">Algorithm</div>
+  <div class="nav-tab" onclick="SP('calc',this)">Drug Doses</div>
+  <div class="nav-tab" onclick="SP('ett',this)">ETT / Airway</div>
+  <div class="nav-tab" onclick="SP('drip',this)">Drip Rates</div>
+  <div class="nav-tab" onclick="SP('rhythm',this)">Rhythms</div>
+  <div class="nav-tab" onclick="SP('brose',this)">Broselow</div>
+  <div class="nav-tab" onclick="SP('quiz',this)">Quiz</div>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="home" class="page active">
+  <div class="hero">
+    <span class="badge b-blue" style="margin-bottom:8px;display:inline-block">AHA PALS 2020</span>
+    <h1>Pediatric Advanced Life Support</h1>
+    <p>Reference ครบวงจร · Algorithm · Drug doses · ETT · Drip rates · Broselow · Quiz</p>
+  </div>
+  <div class="home-grid">
+    <div class="hc" onclick="SP('algo',document.querySelectorAll('.nav-tab')[1])"><div class="hc-icon">🔀</div><h3>Algorithm</h3><p>Cardiac arrest, bradycardia, tachycardia, post-ROSC</p></div>
+    <div class="hc" onclick="SP('calc',document.querySelectorAll('.nav-tab')[2])"><div class="hc-icon">💊</div><h3>Drug Doses</h3><p>คำนวณตามน้ำหนักจริงหรืออายุ</p></div>
+    <div class="hc" onclick="SP('ett',document.querySelectorAll('.nav-tab')[3])"><div class="hc-icon">🫁</div><h3>ETT / Airway</h3><p>ETT size, depth, LMA, blade, ventilation</p></div>
+    <div class="hc" onclick="SP('drip',document.querySelectorAll('.nav-tab')[4])"><div class="hc-icon">💧</div><h3>Drip Rates</h3><p>Epi, Dopa, Dobu, Norepi, Midazolam, Morphine</p></div>
+    <div class="hc" onclick="SP('rhythm',document.querySelectorAll('.nav-tab')[5])"><div class="hc-icon">📈</div><h3>Rhythms</h3><p>VF, pVT, PEA, Asystole, SVT, VT</p></div>
+    <div class="hc" onclick="SP('brose',document.querySelectorAll('.nav-tab')[6])"><div class="hc-icon">🎨</div><h3>Broselow</h3><p>Color band reference ตามน้ำหนัก</p></div>
+    <div class="hc" onclick="SP('quiz',document.querySelectorAll('.nav-tab')[7])"><div class="hc-icon">📝</div><h3>Quiz</h3><p>10 ข้อ พร้อมคำอธิบาย</p></div>
+  </div>
+  <div style="background:#fff;border:1px solid #e5e5e3;border-left:4px solid #E24B4A;border-radius:12px;padding:1rem;margin-top:1rem">
+    <p style="font-size:13px;font-weight:600;margin-bottom:.5rem">⚠️ Key numbers ที่ต้องจำ</p>
+    <div class="key-num">
+      <div class="kn"><strong>0.01 mg/kg</strong>Epinephrine IV/IO</div>
+      <div class="kn"><strong>5 mg/kg</strong>Amiodarone bolus</div>
+      <div class="kn"><strong>2 → 4 J/kg</strong>Defibrillation</div>
+      <div class="kn"><strong>0.5 → 1 J/kg</strong>Cardioversion</div>
+      <div class="kn"><strong>100–120/min</strong>CPR rate</div>
+      <div class="kn"><strong>94–99%</strong>Post-ROSC SpO₂</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ALGORITHM ═══════════ -->
+<div id="algo" class="page">
+  <div class="algo-btns">
+    <button class="ab active" onclick="SA('arrest',this)">Cardiac Arrest</button>
+    <button class="ab" onclick="SA('brady',this)">Bradycardia</button>
+    <button class="ab" onclick="SA('tachy',this)">Tachycardia</button>
+    <button class="ab" onclick="SA('rosc',this)">Post-ROSC</button>
+  </div>
+  <div id="al-arrest" class="flowchart">
+    <div class="fc fc-start">Unresponsive · No breathing / Gasping</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Activate EMS · Start CPR · AED/Defibrillator</div><div class="fc-arr">↓</div>
+    <div class="fc fc-critical">CPR: 100–120/min · Push hard ≥⅓ AP diameter · Full recoil · Minimize interruptions</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Rhythm check ทุก 2 นาที</div><div class="fc-arr">↓</div>
+    <div class="fc-branch">
+      <div class="fc-bx" style="background:#FCEBEB;color:#791F1F;border:1px solid #E24B4A"><strong>Shockable</strong><br><span style="font-size:11px">VF / pVT</span></div>
+      <div class="fc-bx" style="background:#E6F1FB;color:#0C447C;border:1px solid #378ADD"><strong>Non-Shockable</strong><br><span style="font-size:11px">PEA / Asystole</span></div>
+    </div>
+    <div class="fc-branch" style="margin-top:6px">
+      <div style="flex:1;font-size:12px;color:#791F1F;text-align:center;padding:8px;background:#FFF5F5;border-radius:10px">Shock 2 J/kg → CPR 2 min<br>→ Epi 0.01 mg/kg<br>→ Shock 4 J/kg → Amio 5 mg/kg</div>
+      <div style="flex:1;font-size:12px;color:#0C447C;text-align:center;padding:8px;background:#F0F7FF;border-radius:10px">CPR 2 min<br>→ Epi ทุก 3–5 นาที<br>→ Treat H's &amp; T's</div>
+    </div>
+    <div class="fc-arr">↓</div>
+    <div class="fc fc-drug">H's: Hypoxia · Hypovolemia · Hypo/Hyperkalemia · Hypothermia<br>T's: Tension PTX · Tamponade · Toxins · Thrombosis</div>
+  </div>
+  <div id="al-brady" class="flowchart" style="display:none">
+    <div class="fc fc-start">Bradycardia with pulse · HR &lt; 60/min</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Poor perfusion? (altered mental, hypotension, poor cap refill)</div><div class="fc-arr">↓</div>
+    <div class="fc-branch">
+      <div class="fc-bx" style="background:#FAEEDA;color:#633806;border:1px solid #BA7517"><strong>ไม่มี</strong><br><span style="font-size:11px">Observe · Support ABCs</span></div>
+      <div class="fc-bx" style="background:#FCEBEB;color:#791F1F;border:1px solid #E24B4A"><strong>มี</strong><br><span style="font-size:11px">ดำเนินการต่อ</span></div>
+    </div>
+    <div class="fc-arr">↓</div>
+    <div class="fc fc-action">O₂ · IV/IO access · 12-lead ECG · Treat reversible causes</div><div class="fc-arr">↓</div>
+    <div class="fc-branch">
+      <div class="fc-bx" style="background:#EAF3DE;color:#27500A;border:1px solid #639922"><strong>Atropine</strong><br>0.02 mg/kg IV/IO<br>min 0.1 mg · repeat ×1</div>
+      <div class="fc-bx" style="background:#EEEDFE;color:#3C3489;border:1px solid #7F77DD"><strong>Pacing / Epi drip</strong><br>Transcutaneous pacing<br>Epi 0.1–1 mcg/kg/min</div>
+    </div>
+    <div class="fc-arr">↓</div>
+    <div class="fc fc-critical">HR &lt; 60 + ไม่ตอบสนอง → Start CPR</div>
+  </div>
+  <div id="al-tachy" class="flowchart" style="display:none">
+    <div class="fc fc-start">Tachycardia with pulse</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Hemodynamically stable?</div><div class="fc-arr">↓</div>
+    <div class="fc-branch">
+      <div class="fc-bx" style="background:#FCEBEB;color:#791F1F;border:1px solid #E24B4A"><strong>Unstable</strong><br><span style="font-size:11px">Altered mental · hypotension</span></div>
+      <div class="fc-bx" style="background:#EAF3DE;color:#27500A;border:1px solid #639922"><strong>Stable</strong></div>
+    </div>
+    <div class="fc-arr">↓ (unstable)</div>
+    <div class="fc-branch">
+      <div class="fc-bx" style="background:#FCEBEB;color:#791F1F;border:1px solid #E24B4A"><strong>Wide QRS ≥0.09s</strong><br>Cardioversion 0.5→1 J/kg<br>Amio 5 mg/kg (stable)</div>
+      <div class="fc-bx" style="background:#E6F1FB;color:#0C447C;border:1px solid #378ADD"><strong>Narrow QRS</strong><br>Vagal → Adenosine<br>0.1 mg/kg rapid push</div>
+    </div>
+    <div class="fc-arr">↓ (stable narrow)</div>
+    <div class="fc fc-drug">Vagal → Adenosine → Cardioversion ถ้าล้มเหลว · Expert consult</div>
+  </div>
+  <div id="al-rosc" class="flowchart" style="display:none">
+    <div class="fc fc-start">ROSC achieved</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Airway: Advanced airway · waveform capnography · confirm placement</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Breathing: SpO₂ 94–99% · titrate FiO₂ · EtCO₂ 35–40 mmHg</div><div class="fc-arr">↓</div>
+    <div class="fc fc-action">Circulation: 12-lead ECG · treat hypotension · IV/IO fluid · vasoactive drugs</div><div class="fc-arr">↓</div>
+    <div class="fc fc-drug">TTM 32–36°C (comatose) · Avoid fever &gt;37.5°C · Normoglycemia · Treat cause · Refer PICU</div>
+  </div>
+</div>
+
+<!-- ═══════════ DRUG DOSES ═══════════ -->
+<div id="calc" class="page">
+  <div class="tabs">
+    <div class="tab active" onclick="SDT('wt',this,'calc')">น้ำหนักจริง (kg)</div>
+    <div class="tab" onclick="SDT('age',this,'calc')">ประมาณจากอายุ</div>
+  </div>
+  <div id="calc-wt" class="panel active">
+    <div class="input-row">
+      <div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="cw" min="1" max="120" step="0.1" placeholder="เช่น 15" oninput="computeDose('wt')"></div>
+      <button class="clear-btn" onclick="document.getElementById('cw').value='';computeDose('wt')">✕</button>
+    </div>
+    <div id="ci-wt" class="info-bar"></div>
+    <div id="cr-wt"><div class="empty">ใส่น้ำหนัก kg เพื่อคำนวณ dose</div></div>
+  </div>
+  <div id="calc-age" class="panel">
+    <div class="input-row">
+      <div class="field"><label>อายุ</label><input type="number" id="ca" min="0" max="216" step="1" placeholder="เช่น 3" oninput="computeDose('age')"></div>
+      <div class="field"><label>หน่วย</label><select id="cu" onchange="computeDose('age')"><option value="mo">เดือน</option><option value="yr">ปี</option></select></div>
+      <button class="clear-btn" onclick="document.getElementById('ca').value='';computeDose('age')">✕</button>
+    </div>
+    <p style="font-size:12px;color:#aaa;margin-bottom:1rem">Nelson formula: &lt;12 mo = (age+9)/2 · 1–5 yr = 2×(age+4) · 6–12 yr = 3×age+7</p>
+    <div id="ci-age" class="info-bar"></div>
+    <div id="cr-age"><div class="empty">ใส่อายุเพื่อประมาณน้ำหนัก</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ ETT ═══════════ -->
+<div id="ett" class="page">
+  <div class="tabs">
+    <div class="tab active" onclick="SDT('wt',this,'ett')">น้ำหนักจริง (kg)</div>
+    <div class="tab" onclick="SDT('age',this,'ett')">ประมาณจากอายุ</div>
+  </div>
+  <div id="ett-wt" class="panel active">
+    <div class="input-row">
+      <div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="ew" min="1" max="120" step="0.1" placeholder="เช่น 15" oninput="computeETT('wt')"></div>
+      <button class="clear-btn" onclick="document.getElementById('ew').value='';computeETT('wt')">✕</button>
+    </div>
+    <div id="ei-wt" class="info-bar"></div>
+    <div id="er-wt"><div class="empty">ใส่น้ำหนัก kg</div></div>
+  </div>
+  <div id="ett-age" class="panel">
+    <div class="input-row">
+      <div class="field"><label>อายุ</label><input type="number" id="ea" min="0" max="216" step="1" placeholder="เช่น 3" oninput="computeETT('age')"></div>
+      <div class="field"><label>หน่วย</label><select id="eu" onchange="computeETT('age')"><option value="mo">เดือน</option><option value="yr">ปี</option></select></div>
+      <button class="clear-btn" onclick="document.getElementById('ea').value='';computeETT('age')">✕</button>
+    </div>
+    <div id="ei-age" class="info-bar"></div>
+    <div id="er-age"><div class="empty">ใส่อายุ</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ DRIP ═══════════ -->
+<div id="drip" class="page">
+  <div class="input-row">
+    <div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="dw" min="1" max="120" step="0.1" placeholder="เช่น 15" oninput="computeDrip()"></div>
+    <button class="clear-btn" onclick="document.getElementById('dw').value='';computeDrip()">✕</button>
+  </div>
+  <div id="dr-res"><div class="empty">ใส่น้ำหนัก kg เพื่อคำนวณ drip rates</div></div>
+</div>
+
+<!-- ═══════════ RHYTHMS ═══════════ -->
+<div id="rhythm" class="page">
+  <div class="rhy-grid">
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-red">Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">Ventricular Fibrillation (VF)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><path d="M0,22 C5,6 8,36 12,13 C16,3 18,40 22,18 C26,3 29,38 33,16 C37,6 40,36 44,13 C48,3 50,40 54,18 C58,3 61,38 65,16 C69,6 72,36 76,13 C80,3 82,40 86,18 C90,3 93,38 97,16 C101,6 104,36 108,13 C112,3 114,40 118,18 C122,3 125,38 129,16 C133,6 136,36 140,13 C144,3 146,40 150,18 C154,3 157,38 161,16 C165,6 168,36 172,13 C176,3 178,40 182,18 C186,3 189,38 193,16 C197,6 199,36 200,22" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Chaotic · no organized activity · tap to expand</div>
+      <div class="rc-detail"><strong>Rate:</strong> Indeterminate (&gt;300)<br><strong>Tx:</strong> Defib 2 J/kg → CPR 2 min → Epi → Defib 4 J/kg → Amio 5 mg/kg<br><strong>จำ:</strong> Shock ก่อน · minimize hands-off time</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-red">Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">Pulseless VT (pVT)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><path d="M0,30 L18,30 L21,8 L24,38 L27,8 L30,38 L33,30 L51,30 L54,8 L57,38 L60,8 L63,38 L66,30 L84,30 L87,8 L90,38 L93,8 L96,38 L99,30 L117,30 L120,8 L123,38 L126,8 L129,38 L132,30 L150,30 L153,8 L156,38 L159,8 L162,38 L165,30 L183,30 L186,8 L189,38 L192,8 L195,38 L200,30" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Wide QRS, regular · ไม่มี pulse</div>
+      <div class="rc-detail"><strong>Rate:</strong> &gt;120/min · QRS ≥0.09s<br><strong>Tx:</strong> Treat as VF — Defib + CPR<br><strong>จำ:</strong> ไม่มี pulse = treat as VF</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-blue">Non-Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">PEA</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><line x1="0" y1="30" x2="18" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M18,30 L22,26 L24,10 L26,38 L28,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="28" y1="30" x2="68" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M68,30 L72,26 L74,10 L76,38 L78,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="78" y1="30" x2="118" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M118,30 L122,26 L124,10 L126,38 L128,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="128" y1="30" x2="168" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M168,30 L172,26 L174,10 L176,38 L178,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="178" y1="30" x2="200" y2="30" stroke="#378ADD" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Organized ECG · ไม่มี pulse</div>
+      <div class="rc-detail"><strong>Tx:</strong> CPR + Epi ทุก 3–5 นาที + H's &amp; T's<br><strong>จำ:</strong> ECG ดูดี แต่ไม่มี pulse → H's &amp; T's!</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-blue">Non-Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">Asystole</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><line x1="0" y1="22" x2="200" y2="22" stroke="#aaa" stroke-width="1.5" stroke-dasharray="4,3"/></svg></div>
+      <div style="font-size:11px;color:#888">Flat line · ยืนยัน ≥2 leads</div>
+      <div class="rc-detail"><strong>Tx:</strong> CPR + Epi ทุก 3–5 นาที · ห้าม shock<br><strong>จำ:</strong> ยืนยัน 2 leads · ห้าม shock asystole</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-amber">Tachyarrhythmia</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">SVT (Narrow QRS)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><line x1="0" y1="30" x2="8" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M8,30 L9,28 L10,10 L11,40 L12,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="12" y1="30" x2="20" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M20,30 L21,28 L22,10 L23,40 L24,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="24" y1="30" x2="32" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M32,30 L33,28 L34,10 L35,40 L36,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="36" y1="30" x2="44" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M44,30 L45,28 L46,10 L47,40 L48,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="48" y1="30" x2="200" y2="30" stroke="#BA7517" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Regular narrow · HR &gt;220 (infant) / &gt;180 (child)</div>
+      <div class="rc-detail"><strong>Stable:</strong> Vagal → Adenosine 0.1 mg/kg (max 6 mg) → 0.2 mg/kg (max 12 mg)<br><strong>Unstable:</strong> Sync cardioversion 0.5–1 J/kg<br><strong>จำ:</strong> SVT infant มักสูงกว่า 220</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-red">Tachyarrhythmia</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">VT with pulse (Wide QRS)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><path d="M0,30 L18,30 L21,8 L24,38 L27,8 L30,38 L33,30 L51,30 L54,8 L57,38 L60,8 L63,38 L66,30 L84,30 L87,8 L90,38 L93,8 L96,38 L99,30 L117,30 L120,8 L123,38 L126,8 L129,38 L132,30 L150,30 L153,8 L156,38 L159,8 L162,38 L165,30 L183,30 L186,8 L189,38 L192,8 L195,38 L200,30" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Wide QRS ≥0.09s · มี pulse</div>
+      <div class="rc-detail"><strong>Stable:</strong> Amio 5 mg/kg over 20–60 min · Expert consult<br><strong>Unstable:</strong> Sync cardioversion 0.5→1 J/kg<br><strong>จำ:</strong> Wide + pulse + stable → Amio ไม่ใช่ Adenosine</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ BROSELOW ═══════════ -->
+<div id="brose" class="page">
+  <div class="input-row">
+    <div class="field"><label>น้ำหนัก (kg) — ไม่บังคับ</label><input type="number" id="bw" min="1" max="36" step="0.1" placeholder="เช่น 15" oninput="computeBrose()"></div>
+    <button class="clear-btn" onclick="document.getElementById('bw').value='';computeBrose()">✕</button>
+  </div>
+  <div id="br-res"></div>
+</div>
+
+<!-- ═══════════ QUIZ ═══════════ -->
+<div id="quiz" class="page">
+  <div class="qz" id="quiz-container"></div>
+</div>
+
+<script>
+const r=(n,d=2)=>parseFloat(n.toFixed(d));
+const clamp=(v,a,b)=>Math.min(Math.max(v,a),b);
+
+function estWt(mo){
+  if(mo<1)return 3.5;
+  if(mo<=12)return(mo+9)/2;
+  const y=mo/12;
+  if(y<=5)return 2*(y+4);
+  if(y<=12)return 3*y+7;
+  return Math.min(2.4*y+8,70);
+}
+
+function SP(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(el&&el.classList)el.classList.add('active');
+  if(id==='quiz'&&qCur===0)renderQ();
+  if(id==='brose')computeBrose();
+}
+
+function SA(id,el){
+  document.querySelectorAll('.flowchart').forEach(f=>f.style.display='none');
+  document.querySelectorAll('.ab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('al-'+id).style.display='flex';
+  el.classList.add('active');
+}
+
+function SDT(t,el,page){
+  const wrap=document.getElementById(page);
+  wrap.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  wrap.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(page+'-'+t).classList.add('active');
+}
+
+function doseHTML(wt){
+  const epi=r(clamp(wt*.01,.001,1),3),epiml=r(clamp(wt*.1,.1,10),1);
+  const amio=r(clamp(wt*5,5,300));
+  const a1=r(clamp(wt*.1,.1,6),1),a2=r(clamp(wt*.2,.2,12),1);
+  const atro=r(clamp(wt*.02,.1,.5),2);
+  const bicarb=r(clamp(wt,1,50));
+  const cacl=r(clamp(wt*20,20,2000)),caclml=r(clamp(wt*.2,.2,20),1);
+  const mg=r(clamp(wt*25,25,2000)),mgml=r(clamp(wt*.5,.5,40),1);
+  const fl=r(clamp(wt*20,20,1000));
+  const d10=r(clamp(wt*2,2,20),1),d25=r(clamp(wt*2,2,25),1);
+  const df1=r(clamp(wt*2,2,200)),df2=r(clamp(wt*4,4,200));
+  const cv1=r(clamp(wt*.5,.5,50),1),cv2=r(clamp(wt*1,1,100),1);
+  return`<div class="sec-label">⚡ Defibrillation / Cardioversion</div>
+<div class="grid">
+  <div class="dc dc-red"><div class="dc-cat">VF/pVT 1st</div><div class="dc-name">Defibrillation</div><div class="dc-val">${df1} J</div><div class="dc-note">2 J/kg</div></div>
+  <div class="dc dc-red"><div class="dc-cat">VF/pVT 2nd+</div><div class="dc-name">Defibrillation</div><div class="dc-val">${df2} J</div><div class="dc-note">4 J/kg · max 200 J</div></div>
+  <div class="dc dc-amber"><div class="dc-cat">Cardioversion 1st</div><div class="dc-name">Synchronized</div><div class="dc-val">${cv1} J</div><div class="dc-note">0.5 J/kg</div></div>
+  <div class="dc dc-amber"><div class="dc-cat">Cardioversion 2nd</div><div class="dc-name">Synchronized</div><div class="dc-val">${cv2} J</div><div class="dc-note">1–2 J/kg</div></div>
+</div>
+<div class="sec-label">💊 Cardiac Arrest</div>
+<div class="grid">
+  <div class="dc"><div class="dc-cat">Vasopressor</div><div class="dc-name">Epinephrine</div><div class="dc-val">${epi} mg</div><div class="dc-unit">= ${epiml} mL of 1:10,000</div><div class="dc-note">0.01 mg/kg IV/IO · ทุก 3–5 นาที · max 1 mg</div></div>
+  <div class="dc"><div class="dc-cat">Antiarrhythmic</div><div class="dc-name">Amiodarone</div><div class="dc-val">${amio} mg</div><div class="dc-unit">bolus IV/IO</div><div class="dc-note">5 mg/kg · max 300 mg · repeat ×2</div></div>
+</div>
+<div class="sec-label">🫀 Antiarrhythmic</div>
+<div class="grid">
+  <div class="dc dc-teal"><div class="dc-cat">SVT 1st</div><div class="dc-name">Adenosine</div><div class="dc-val">${a1} mg</div><div class="dc-unit">rapid IV push</div><div class="dc-note">0.1 mg/kg · max 6 mg · flush NS</div></div>
+  <div class="dc dc-teal"><div class="dc-cat">SVT 2nd</div><div class="dc-name">Adenosine</div><div class="dc-val">${a2} mg</div><div class="dc-unit">rapid IV push</div><div class="dc-note">0.2 mg/kg · max 12 mg</div></div>
+  <div class="dc dc-purple"><div class="dc-cat">Bradycardia</div><div class="dc-name">Atropine</div><div class="dc-val">${atro} mg</div><div class="dc-unit">IV/IO</div><div class="dc-note">0.02 mg/kg · min 0.1 · max 0.5 mg</div></div>
+</div>
+<div class="sec-label">🧪 Support</div>
+<div class="grid">
+  <div class="dc dc-green"><div class="dc-cat">IV Fluid</div><div class="dc-name">NSS/LRS bolus</div><div class="dc-val">${fl} mL</div><div class="dc-note">20 mL/kg · push 5–20 min</div></div>
+  <div class="dc"><div class="dc-cat">Metabolic</div><div class="dc-name">NaHCO₃</div><div class="dc-val">${bicarb} mEq</div><div class="dc-note">1 mEq/kg slow IV · max 50 mEq</div></div>
+  <div class="dc"><div class="dc-cat">Electrolyte</div><div class="dc-name">CaCl₂ 10%</div><div class="dc-val">${cacl} mg</div><div class="dc-unit">= ${caclml} mL</div><div class="dc-note">20 mg/kg slow · max 2 g</div></div>
+  <div class="dc"><div class="dc-cat">Electrolyte</div><div class="dc-name">MgSO₄ 50%</div><div class="dc-val">${mg} mg</div><div class="dc-unit">= ${mgml} mL</div><div class="dc-note">25 mg/kg over 10–20 min · max 2 g</div></div>
+  <div class="dc dc-green"><div class="dc-cat">Hypoglycemia neonates</div><div class="dc-name">D10W</div><div class="dc-val">${d10} mL</div><div class="dc-note">2 mL/kg IV</div></div>
+  <div class="dc dc-green"><div class="dc-cat">Hypoglycemia child</div><div class="dc-name">D25W</div><div class="dc-val">${d25} mL</div><div class="dc-note">2 mL/kg IV · max 25 mL</div></div>
+</div>`;
+}
+
+function computeDose(src){
+  let wt;
+  if(src==='wt'){
+    wt=parseFloat(document.getElementById('cw').value);
+    if(!wt||wt<=0){document.getElementById('cr-wt').innerHTML='<div class="empty">ใส่น้ำหนัก kg เพื่อคำนวณ dose</div>';document.getElementById('ci-wt').style.display='none';return;}
+    document.getElementById('ci-wt').style.display='block';
+    document.getElementById('ci-wt').innerHTML=`น้ำหนักจริง: <strong>${r(wt,1)} kg</strong>`;
+    document.getElementById('cr-wt').innerHTML=doseHTML(wt);
+  } else {
+    const av=parseFloat(document.getElementById('ca').value);
+    const au=document.getElementById('cu').value;
+    if(!av||av<0){document.getElementById('cr-age').innerHTML='<div class="empty">ใส่อายุเพื่อประมาณน้ำหนัก</div>';document.getElementById('ci-age').style.display='none';return;}
+    const mo=au==='yr'?av*12:av;
+    wt=r(estWt(mo),1);
+    const ageStr=au==='yr'?`${av} ปี`:`${av} เดือน`;
+    document.getElementById('ci-age').style.display='block';
+    document.getElementById('ci-age').innerHTML=`อายุ <strong>${ageStr}</strong> → น้ำหนักประมาณ <strong>${wt} kg</strong>`;
+    document.getElementById('cr-age').innerHTML=doseHTML(wt);
+  }
+}
+
+function ettHTML(wt,ageYr){
+  const neo=ageYr<0.08,inf=ageYr<1;
+  let unc,cuf,dep,blade,lma;
+  if(neo){unc=3.0;cuf='N/A';dep=r(wt+6,1);blade='Miller 0';lma='N/A';}
+  else if(inf){unc=3.5;cuf='3.0';dep=r(wt+6,1);blade='Miller 1';lma='1';}
+  else{unc=r(ageYr/4+4,1);cuf=r(ageYr/4+3,1);dep=r(unc*3,1);const bn=ageYr<3?1:2;blade=`Miller ${bn} / Mac ${bn}`;lma=ageYr<5?'1.5':ageYr<10?'2':'2.5';}
+  const tv6=r(wt*6),tv8=r(wt*8);
+  const rr=ageYr<1?'25–30':ageYr<8?'20–25':'15–20';
+  const bvm=wt<10?'Infant/Child mask':'Child mask';
+  const bag=wt<20?'Child BVM 450 mL':'Adult BVM 1500 mL';
+  return`<div class="sec-label">🫁 ETT Size</div>
+<div class="grid">
+  <div class="dc"><div class="dc-cat">Uncuffed</div><div class="dc-name">ETT size</div><div class="dc-val" style="color:#0C447C">${unc} mm</div><div class="dc-note">(age/4)+4</div></div>
+  <div class="dc"><div class="dc-cat">Cuffed (preferred)</div><div class="dc-name">ETT size</div><div class="dc-val">${cuf} mm</div><div class="dc-note">(age/4)+3 · AHA 2020 preferred</div></div>
+  <div class="dc dc-teal"><div class="dc-cat">Oral insertion depth</div><div class="dc-name">at lip</div><div class="dc-val">${dep} cm</div><div class="dc-note">ETT size×3 หรือ kg+6 (infant)</div></div>
+  <div class="dc dc-purple"><div class="dc-cat">LMA</div><div class="dc-name">Size</div><div class="dc-val">${lma}</div><div class="dc-note">alternative airway</div></div>
+</div>
+<div class="sec-label">🩺 Laryngoscope / BVM</div>
+<div class="grid">
+  <div class="dc dc-amber"><div class="dc-cat">Blade</div><div class="dc-name">Laryngoscope</div><div class="dc-val" style="font-size:14px">${blade}</div></div>
+  <div class="dc"><div class="dc-cat">BVM mask</div><div class="dc-name">${bvm}</div><div class="dc-val" style="font-size:13px">${bag}</div></div>
+</div>
+<div class="sec-label">💨 Ventilation</div>
+<div class="grid">
+  <div class="dc dc-green"><div class="dc-cat">Tidal volume</div><div class="dc-name">6–8 mL/kg</div><div class="dc-val">${tv6}–${tv8} mL</div></div>
+  <div class="dc dc-green"><div class="dc-cat">RR (invasive)</div><div class="dc-name">Target</div><div class="dc-val" style="font-size:15px">${rr}/min</div></div>
+  <div class="dc"><div class="dc-cat">Post-ROSC EtCO₂</div><div class="dc-name">Target</div><div class="dc-val">35–40 mmHg</div></div>
+</div>`;
+}
+
+function computeETT(src){
+  let wt,ageYr,infoEl,resEl;
+  if(src==='wt'){
+    wt=parseFloat(document.getElementById('ew').value);
+    infoEl=document.getElementById('ei-wt');resEl=document.getElementById('er-wt');
+    if(!wt||wt<=0){resEl.innerHTML='<div class="empty">ใส่น้ำหนัก kg</div>';infoEl.style.display='none';return;}
+    ageYr=wt<10?wt/2-1:wt<40?(wt-7)/3:12;ageYr=Math.max(0,ageYr);
+    infoEl.style.display='block';infoEl.innerHTML=`น้ำหนัก <strong>${r(wt,1)} kg</strong> → อายุประมาณ <strong>${r(ageYr,1)} ปี</strong>`;
+    resEl.innerHTML=ettHTML(wt,ageYr);
+  } else {
+    const av=parseFloat(document.getElementById('ea').value);
+    const au=document.getElementById('eu').value;
+    infoEl=document.getElementById('ei-age');resEl=document.getElementById('er-age');
+    if(!av||av<0){resEl.innerHTML='<div class="empty">ใส่อายุ</div>';infoEl.style.display='none';return;}
+    const mo=au==='yr'?av*12:av;
+    wt=r(estWt(mo),1);ageYr=mo/12;
+    const ageStr=au==='yr'?`${av} ปี`:`${av} เดือน`;
+    infoEl.style.display='block';infoEl.innerHTML=`อายุ <strong>${ageStr}</strong> → น้ำหนักประมาณ <strong>${wt} kg</strong>`;
+    resEl.innerHTML=ettHTML(wt,ageYr);
+  }
+}
+
+function computeDrip(){
+  const wt=parseFloat(document.getElementById('dw').value);
+  const res=document.getElementById('dr-res');
+  if(!wt||wt<=0){res.innerHTML='<div class="empty">ใส่น้ำหนัก kg เพื่อคำนวณ drip rates</div>';return;}
+  function dc(name,cat,col,ranges,note){
+    return`<div class="drip-card">
+      <div class="drip-hdr"><span class="drip-name">${name}</span><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f5f5f3;color:#888">${cat}</span></div>
+      <div class="drip-grid">${ranges.map(([lbl,val])=>`<div class="drip-d"><div class="drip-dlbl">${lbl}</div><div class="drip-dval" style="color:${col}">${val}</div><div class="drip-dunit">mL/hr</div></div>`).join('')}</div>
+      <div class="drip-note">${note}</div>
+    </div>`;}
+  const ep=d=>r(d*60/6,2);
+  const dp=d=>r(d,2);
+  const mi=d=>r(d*wt,2);
+  const mo=d=>r(d*wt/0.1,2);
+  res.innerHTML=`<p style="font-size:12px;color:#aaa;margin-bottom:1rem">น้ำหนัก <strong style="color:#185FA5">${r(wt,1)} kg</strong> · standard preparation ตามที่ระบุ</p>
+${dc('Epinephrine','Vasopressor · Inotrope','#A32D2D',[['0.05 mcg/kg/min',ep(0.05)],['0.1 mcg/kg/min',ep(0.1)],['0.3 mcg/kg/min',ep(0.3)],['1.0 mcg/kg/min',ep(1.0)]],'Std prep: <strong>0.3 mg/kg</strong> in 50 mL → 1 mL/hr = 0.1 mcg/kg/min · Range 0.01–1 mcg/kg/min')}
+${dc('Dopamine','Vasopressor · Inotrope','#854F0B',[['5 mcg/kg/min',dp(5)],['10 mcg/kg/min',dp(10)],['15 mcg/kg/min',dp(15)],['20 mcg/kg/min',dp(20)]],'Std prep: <strong>3 mg/kg</strong> in 50 mL → 1 mL/hr = 1 mcg/kg/min · Range 2–20 mcg/kg/min')}
+${dc('Dobutamine','Inotrope','#185FA5',[['5 mcg/kg/min',dp(5)],['10 mcg/kg/min',dp(10)],['15 mcg/kg/min',dp(15)],['20 mcg/kg/min',dp(20)]],'Std prep: <strong>3 mg/kg</strong> in 50 mL → 1 mL/hr = 1 mcg/kg/min · ไม่มี vasopressor effect')}
+${dc('Norepinephrine','Vasopressor','#534AB7',[['0.05 mcg/kg/min',ep(0.05)],['0.1 mcg/kg/min',ep(0.1)],['0.3 mcg/kg/min',ep(0.3)],['1.0 mcg/kg/min',ep(1.0)]],'Std prep: <strong>0.3 mg/kg</strong> in 50 mL → 1 mL/hr = 0.1 mcg/kg/min · Range 0.01–2 mcg/kg/min')}
+${dc('Midazolam','Sedation','#0F6E56',[['0.05 mg/kg/hr',mi(0.05)],['0.1 mg/kg/hr',mi(0.1)],['0.2 mg/kg/hr',mi(0.2)],['0.3 mg/kg/hr',mi(0.3)]],'Std prep: 1 mg/mL · Range 0.05–0.3 mg/kg/hr · ระวัง respiratory depression')}
+${dc('Morphine','Analgesia','#3B6D11',[['0.01 mg/kg/hr',r(mo(0.01),1)],['0.02 mg/kg/hr',r(mo(0.02),1)],['0.04 mg/kg/hr',r(mo(0.04),1)],['0.06 mg/kg/hr',r(mo(0.06),1)]],'Std prep: 0.1 mg/mL · Range 0.01–0.06 mg/kg/hr · ระวัง respiratory depression + hypotension')}`;
+}
+
+const bands=[
+  {name:'Grey',wt:'3–5 kg',min:3,max:5.9,col:'#9E9E9E',ett:'3.0–3.5',defib:'6–10 J',epi:'0.03–0.05 mg',fl:'60–100 mL'},
+  {name:'Pink',wt:'6–7 kg',min:6,max:7.9,col:'#F06292',ett:'3.5',defib:'12–14 J',epi:'0.06–0.07 mg',fl:'120–140 mL'},
+  {name:'Red',wt:'8–9 kg',min:8,max:9.9,col:'#EF5350',ett:'3.5',defib:'16–18 J',epi:'0.08–0.09 mg',fl:'160–180 mL'},
+  {name:'Purple',wt:'10–11 kg',min:10,max:11.9,col:'#9C27B0',ett:'3.5–4.0',defib:'20–22 J',epi:'0.10–0.11 mg',fl:'200–220 mL'},
+  {name:'Yellow',wt:'12–14 kg',min:12,max:14.9,col:'#FBC02D',ett:'4.0',defib:'24–28 J',epi:'0.12–0.14 mg',fl:'240–280 mL'},
+  {name:'White',wt:'15–18 kg',min:15,max:18.9,col:'#B0BEC5',ett:'4.5',defib:'30–36 J',epi:'0.15–0.18 mg',fl:'300–360 mL'},
+  {name:'Blue',wt:'19–23 kg',min:19,max:23.9,col:'#1976D2',ett:'5.0',defib:'38–46 J',epi:'0.19–0.23 mg',fl:'380–460 mL'},
+  {name:'Orange',wt:'24–29 kg',min:24,max:29.9,col:'#F57C00',ett:'5.5',defib:'48–58 J',epi:'0.24–0.29 mg',fl:'480–580 mL'},
+  {name:'Green',wt:'30–36 kg',min:30,max:36,col:'#388E3C',ett:'6.0 cuffed',defib:'60–72 J',epi:'0.30–0.36 mg',fl:'600–720 mL'},
+];
+
+function computeBrose(){
+  const wt=parseFloat(document.getElementById('bw').value)||null;
+  const res=document.getElementById('br-res');
+  const active=wt?bands.findIndex(b=>wt>=b.min&&wt<=b.max):-1;
+  res.innerHTML=bands.map((b,i)=>{
+    const isA=i===active,isDim=active!==-1&&!isA;
+    return`<div class="brose-row${isA?' active-band':''}${isDim?' dim':''}">
+      <div class="brose-color" style="background:${b.col}"></div>
+      <div style="flex:1">
+        <div class="brose-name">${b.name} <span style="font-size:12px;font-weight:400;color:#888">${b.wt}</span>${isA?`<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#185FA5;color:#fff;margin-left:6px">✓ ${r(wt,1)} kg</span>`:''}
+        </div>
+        <div class="brose-details">
+          <span>ETT ${b.ett}</span><span>Defib ${b.defib}</span><span>Epi ${b.epi}</span><span>Fluid ${b.fl}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+const QS=[
+  {q:"เด็กหมดสติ ไม่หายใจ ขั้นตอนแรกหลัง confirm unresponsive คืออะไร?",opts:["เริ่ม CPR ทันที","Activate EMS และเริ่ม CPR","ใส่ IV access","เปิด airway และ give 2 breaths"],ans:1,exp:"ต้อง activate EMS (หรือ shout for help) พร้อมกับเริ่ม CPR — AHA 2020 เน้น minimize time to first compression"},
+  {q:"Epinephrine dose สำหรับ cardiac arrest ใน pediatric คือ?",opts:["0.1 mg/kg IV","0.01 mg/kg IV/IO","0.1 mL/kg of 1:1000","1 mg flat dose"],ans:1,exp:"0.01 mg/kg IV/IO = 0.1 mL/kg of 1:10,000 · Max 1 mg · ให้ทุก 3–5 นาที"},
+  {q:"พบ VF ใน monitor ขั้นตอนถัดจาก confirm rhythm คืออะไร?",opts:["ให้ Epinephrine ก่อน","Shock 2 J/kg ทันที","CPR 2 นาทีก่อน shock","ให้ Amiodarone ก่อน shock"],ans:1,exp:"VF/pVT = shockable → shock 2 J/kg ทันที → CPR 2 min → check rhythm → ถ้ายังมี VF → shock 4 J/kg → Epi → Amio"},
+  {q:"Adenosine first dose ใน SVT คือ?",opts:["0.2 mg/kg max 12 mg","0.1 mg/kg max 6 mg","0.01 mg/kg max 1 mg","0.5 mg/kg max 6 mg"],ans:1,exp:"First dose: 0.1 mg/kg (max 6 mg) · Second: 0.2 mg/kg (max 12 mg) · Push RAPID + flush NS ทันที"},
+  {q:"Atropine minimum dose ใน pediatric bradycardia เพื่อหลีกเลี่ยง paradoxical bradycardia?",opts:["0.01 mg","0.05 mg","0.1 mg","0.5 mg"],ans:2,exp:"Min 0.1 mg — dose ต่ำกว่านี้อาจเกิด paradoxical bradycardia จาก central vagal stimulation"},
+  {q:"Post-ROSC target SpO₂ ตาม AHA 2020 คือ?",opts:["SpO₂ > 99%","SpO₂ 94–99%","SpO₂ > 90%","SpO₂ 90–95%"],ans:1,exp:"Target 94–99% · หลีกเลี่ยง hyperoxia เพราะเพิ่ม oxidative injury post-ROSC"},
+  {q:"H's & T's ข้อใดไม่ใช่ reversible cause ของ cardiac arrest?",opts:["Hypovolemia","Tension pneumothorax","Hypertension","Tamponade"],ans:2,exp:"H's = Hypoxia, Hypovolemia, Hypo/Hyperkalemia, Hypothermia · T's = Tension PTX, Tamponade, Toxins, Thrombosis · Hypertension ไม่อยู่ใน list"},
+  {q:"เด็ก 2 ปี HR 180/min ง่วงซึม CRT 4 วิ BP ต่ำ QRS narrow regular — ทำอย่างไร?",opts:["Adenosine 0.1 mg/kg IV push","Synchronized cardioversion 0.5 J/kg","Amiodarone 5 mg/kg over 60 min","Vagal maneuver แล้วรอ"],ans:1,exp:"SVT + unstable → Synchronized cardioversion 0.5–1 J/kg ไม่รอลองยา"},
+  {q:"Amiodarone dose ใน VF/pVT คือ?",opts:["1 mg/kg bolus","5 mg/kg bolus max 300 mg","5 mg/kg over 60 min","10 mg/kg bolus"],ans:1,exp:"Cardiac arrest: 5 mg/kg IV/IO bolus (max 300 mg) · Stable: 5 mg/kg over 20–60 min"},
+  {q:"Post-ROSC TTM target temperature คือ?",opts:["32–36°C","36–37.5°C","28–32°C","37–38°C"],ans:0,exp:"TTM: 32–36°C สำหรับ comatose post-ROSC · Avoid fever >37.5°C · ใช้ continuous monitoring"}
+];
+let qCur=0,qScore=0;
+
+function renderQ(){
+  const q=QS[qCur];
+  const pct=Math.round(qCur/QS.length*100);
+  document.getElementById('quiz-container').innerHTML=`
+    <p class="q-prog">ข้อ ${qCur+1} / ${QS.length}</p>
+    <div class="q-bar"><div class="q-fill" style="width:${pct}%"></div></div>
+    <p class="q-text">${q.q}</p>
+    <div class="q-opts">${q.opts.map((o,i)=>`<div class="q-opt" id="qo${i}" onclick="selQ(${i})">${String.fromCharCode(65+i)}. ${o}</div>`).join('')}</div>
+    <div class="q-exp" id="qexp">${q.exp}</div>
+    <button class="q-next" id="qnext" onclick="nextQ()">${qCur===QS.length-1?'ดูผล':'ข้อถัดไป →'}</button>`;
+  window._qa=false;
+}
+
+function selQ(i){
+  if(window._qa)return;
+  window._qa=true;
+  const ans=QS[qCur].ans;
+  document.querySelectorAll('.q-opt').forEach(o=>o.classList.add('disabled'));
+  document.getElementById('qo'+i).classList.add(i===ans?'correct':'wrong');
+  if(i!==ans)document.getElementById('qo'+ans).classList.add('correct');
+  if(i===ans)qScore++;
+  document.getElementById('qexp').style.display='block';
+  document.getElementById('qnext').style.display='inline-block';
+}
+
+function nextQ(){
+  qCur++;
+  if(qCur>=QS.length){
+    const pct=Math.round(qScore/QS.length*100);
+    const msg=pct>=80?'ยอดเยี่ยม! พร้อม PALS 💪':pct>=60?'ดีมาก ทบทวนอีกนิด':'ลองทบทวน algorithm และ drug doses อีกครั้ง';
+    document.getElementById('quiz-container').innerHTML=`<div class="q-result"><p style="font-size:13px;color:#888">ผลการทดสอบ</p><div class="q-score">${qScore}/${QS.length}</div><p style="font-size:13px;color:#888">${pct}% · ${msg}</p><br><button class="q-restart" onclick="qCur=0;qScore=0;renderQ()">↺ ทำใหม่</button></div>`;
+    return;
+  }
+  renderQ();
+}
+
+computeBrose();
+</script>
+</body>
+</html>
