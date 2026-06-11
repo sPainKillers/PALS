@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PALS 2020 — Complete Reference</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#1a1a1a;background:#f5f5f3;font-size:15px}
+
+/* NAV */
+.nav{background:#fff;border-bottom:1px solid #e5e5e3;padding:0 1rem;display:flex;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.nav-brand{font-size:15px;font-weight:600;padding:.6rem 0;margin-right:1rem;white-space:nowrap}
+.nav-brand span{color:#185FA5}
+.nav-tab{padding:.6rem .8rem;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;color:#666;transition:all .2s;white-space:nowrap}
+.nav-tab.active{color:#185FA5;border-bottom-color:#185FA5}
+.nav-tab:hover{color:#1a1a1a}
+
+/* STICKY HEADER */
+.sticky-hdr{background:#fff;border-bottom:1px solid #e5e5e3;padding:.7rem 1rem;position:sticky;top:41px;z-index:99;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.hdr-inner{max-width:940px;margin:0 auto}
+.hdr-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.hfield{display:flex;flex-direction:column;gap:3px}
+.hfield label{font-size:11px;color:#888}
+.hfield input,.hfield select{padding:5px 9px;border:1px solid #ddd;border-radius:8px;font-size:13px;background:#fff;color:#1a1a1a;width:100px;outline:none}
+.hfield input:focus,.hfield select:focus{border-color:#185FA5}
+.hdivider{width:1px;background:#e5e5e3;height:36px;margin:0 4px;align-self:center}
+.or-sep{font-size:12px;color:#aaa;padding-bottom:2px;align-self:flex-end}
+.dose-strip{display:flex;gap:7px;flex-wrap:wrap;margin-top:.6rem;padding-top:.6rem;border-top:1px solid #f0f0ee}
+.ds{background:#f5f5f3;border-radius:8px;padding:5px 9px;flex:1;min-width:88px}
+.ds-lbl{font-size:10px;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:.03em}
+.ds-val{font-size:15px;font-weight:600;color:#185FA5;margin-top:1px}
+.ds-val.red{color:#A32D2D}
+.ds-unit{font-size:10px;color:#aaa}
+
+/* PAGES */
+.page{display:none;padding:1.25rem;max-width:940px;margin:0 auto}
+.page.active{display:block}
+
+/* INPUTS */
+.tabs{display:flex;border-bottom:1px solid #e5e5e3;margin-bottom:1.25rem}
+.tab{padding:.5rem 1rem;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#666;transition:all .2s}
+.tab.active{color:#185FA5;border-bottom-color:#185FA5}
+.panel{display:none}.panel.active{display:block}
+.input-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:12px;color:#666}
+.field input,.field select{padding:7px 10px;border:1px solid #ddd;border-radius:8px;font-size:14px;background:#fff;color:#1a1a1a;width:130px;outline:none}
+.field input:focus,.field select:focus{border-color:#185FA5}
+.clear-btn{padding:7px 12px;background:#fff;color:#666;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer}
+.info-bar{background:#f0f0ee;border-radius:8px;padding:9px 14px;font-size:13px;margin-bottom:1.25rem;display:none;line-height:1.6}
+.info-bar strong{color:#185FA5}
+.sec-label{font-size:11px;font-weight:600;color:#888;letter-spacing:.05em;text-transform:uppercase;margin:1.2rem 0 .6rem;padding-bottom:4px;border-bottom:1px solid #e5e5e3}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;margin-bottom:.5rem}
+.dc{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.85rem 1rem}
+.dc-cat{font-size:10px;font-weight:600;color:#aaa;text-transform:uppercase;margin-bottom:3px}
+.dc-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.dc-val{font-size:20px;font-weight:600;color:#185FA5}
+.dc-unit{font-size:11px;color:#888}
+.dc-note{font-size:11px;color:#aaa;margin-top:4px;border-top:1px solid #f0f0ee;padding-top:4px;line-height:1.4}
+.dc-red .dc-val{color:#A32D2D}.dc-amber .dc-val{color:#854F0B}.dc-green .dc-val{color:#3B6D11}.dc-teal .dc-val{color:#0F6E56}.dc-purple .dc-val{color:#534AB7}
+.empty{text-align:center;padding:2.5rem 1rem;color:#aaa;font-size:14px}
+
+/* HOME */
+.hero{background:#fff;border:1px solid #e5e5e3;border-left:4px solid #185FA5;border-radius:12px;padding:1.5rem;margin-bottom:1.25rem}
+.hero h1{font-size:20px;font-weight:600;margin-bottom:.4rem}
+.hero p{font-size:13px;color:#666;line-height:1.6}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.hc{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.9rem 1rem;cursor:pointer;transition:border-color .2s}
+.hc:hover{border-color:#185FA5}
+.hc-icon{font-size:18px;margin-bottom:6px;color:#185FA5}
+.hc h3{font-size:13px;font-weight:600;margin-bottom:3px}
+.hc p{font-size:11px;color:#888}
+.key-num{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:1rem}
+.kn{background:#f5f5f3;padding:8px 10px;border-radius:8px;font-size:12px}
+.kn strong{display:block;font-size:15px;color:#185FA5;margin-bottom:1px}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600}
+.b-red{background:#FCEBEB;color:#791F1F}.b-blue{background:#E6F1FB;color:#0C447C}.b-amber{background:#FAEEDA;color:#633806}.b-green{background:#EAF3DE;color:#27500A}.b-purple{background:#EEEDFE;color:#3C3489}.b-teal{background:#E1F5EE;color:#085041}
+</style>
+</head>
+<style>
+/* INTERACTIVE ALGORITHM */
+.algo-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.ab{padding:6px 14px;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;color:#666;transition:all .2s}
+.ab.active{background:#E6F1FB;color:#0C447C;border-color:#378ADD}
+.algo-resus-bar{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.7rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.arb-label{font-size:12px;color:#666;white-space:nowrap}
+.arb-disp{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;min-width:60px;color:#185FA5}
+.arb-disp.running{color:#A32D2D}
+.arb-btn{padding:6px 14px;border:1px solid #ddd;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#666;white-space:nowrap}
+.arb-btn.go{background:#E6F1FB;color:#0C447C;border-color:#378ADD}
+.arb-btn.stop{background:#FCEBEB;color:#791F1F;border-color:#E24B4A}
+.arb-cycle{font-size:12px;color:#666;margin-left:auto;background:#f5f5f3;padding:4px 10px;border-radius:8px;white-space:nowrap}
+.arb-cycle strong{color:#185FA5}
+.epi-bar{margin-bottom:.75rem}
+.drug-pill{padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid;display:flex;align-items:center;gap:8px}
+.dp-epi{background:#EAF3DE;color:#27500A;border-color:#639922}
+.dp-epi-timer{background:#FAEEDA;color:#633806;border-color:#BA7517}
+.dp-epi-due{background:#FCEBEB;color:#791F1F;border-color:#E24B4A}
+.pill-lbl{font-size:11px;opacity:.75;white-space:nowrap}
+.pill-val{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.steps{display:flex;flex-direction:column;gap:0}
+.step-wrap{opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.step-wrap.visible{opacity:1;transform:none;pointer-events:auto}
+.conn-line{display:flex;justify-content:center;height:24px;align-items:center}
+.conn-line span{display:block;width:1.5px;height:24px;background:#ccc;position:relative}
+.conn-line span::after{content:'▼';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);font-size:10px;color:#ccc;line-height:1}
+.card{border-radius:12px;padding:.875rem 1.1rem;border:1px solid #e5e5e3;background:#fff}
+.card.start{border-color:#378ADD;background:#E6F1FB}
+.card.action{border-color:#ddd}
+.card.critical{border-color:#E24B4A;background:#FCEBEB}
+.card.drug{border-color:#639922;background:#EAF3DE}
+.card.end-good{border-color:#1D9E75;background:#E1F5EE}
+.card.end-bad{border-color:#E24B4A;background:#FCEBEB}
+.c-tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;color:#aaa}
+.start .c-tag{color:#185FA5}.critical .c-tag{color:#A32D2D}.drug .c-tag{color:#3B6D11}.end-good .c-tag{color:#085041}.end-bad .c-tag{color:#A32D2D}
+.c-title{font-size:14px;font-weight:600;line-height:1.5}
+.start .c-title{color:#0C447C}.critical .c-title{color:#791F1F}.drug .c-title{color:#27500A}.end-good .c-title{color:#085041}.end-bad .c-title{color:#791F1F}
+.c-sub{font-size:12px;line-height:1.6;margin-top:3px;color:#666}
+.start .c-sub{color:#185FA5}.critical .c-sub{color:#A32D2D}.drug .c-sub{color:#3B6D11}.end-good .c-sub{color:#0F6E56}.end-bad .c-sub{color:#A32D2D}
+.c-divider{border:none;border-top:1px solid #B5D4F4;margin:.75rem 0}
+.loop-card{border-radius:12px;border:1px solid;background:#fff;overflow:hidden}
+.loop-card.shock{border-color:#E24B4A}
+.loop-card.nonshock{border-color:#378ADD}
+.loop-header{padding:.6rem 1rem;font-size:11px;font-weight:600}
+.loop-card.shock .loop-header{background:#FCEBEB;color:#791F1F}
+.loop-card.nonshock .loop-header{background:#E6F1FB;color:#0C447C}
+.loop-cols{display:grid;border-top:1px solid}
+.loop-card.shock .loop-cols{border-color:#F09595}
+.loop-card.nonshock .loop-cols{border-color:#B5D4F4}
+.loop-col{padding:.75rem .875rem;border-right:1px solid}
+.loop-col:last-child{border-right:none}
+.loop-card.shock .loop-col{border-color:#F09595}
+.loop-card.nonshock .loop-col{border-color:#B5D4F4}
+.lc-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.lc-val{font-size:14px;font-weight:600;line-height:1.4}
+.lc-sub{font-size:11px;margin-top:2px;line-height:1.4;color:#888}
+.defib-col .lc-lbl{color:#A32D2D}
+.shock-btn{display:block;width:100%;margin-top:6px;padding:8px;background:#E24B4A;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
+.shock-btn:hover{background:#A32D2D}
+.shock-btn:active{transform:scale(.97)}
+.shock-btn.done{background:#EAF3DE;color:#27500A;cursor:default;border:1px solid #639922}
+.cpr-col .lc-lbl{color:#A32D2D}
+.cpr-col .lc-val{color:#aaa;font-size:22px;font-variant-numeric:tabular-nums}
+.cpr-col.running .lc-val{color:#791F1F}
+.cpr-col.done .lc-val{color:#3B6D11}
+.cpr-col .lc-sub{color:#aaa}
+.cpr-col.running .lc-sub{color:#A32D2D}
+.epi-col .lc-lbl{color:#3B6D11}
+.epi-col .lc-val{color:#27500A}
+.epi-next{font-size:12px;color:#3B6D11;margin-top:4px;font-variant-numeric:tabular-nums;font-weight:600}
+.epi-next.due{color:#791F1F}
+.amio-col .lc-lbl{color:#185FA5}
+.amio-col .lc-val{color:#0C447C}
+.amio-col.maxed .lc-lbl{color:#A32D2D}
+.amio-col.maxed .lc-val{color:#791F1F;font-size:12px}
+.rhythm-check-card{border-radius:12px;padding:.875rem 1.1rem;border:1px solid #ddd;background:#fff}
+.rhythm-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#aaa;margin-bottom:.5rem}
+.rhythm-prompt{font-size:14px;font-weight:600;margin-bottom:1rem}
+.rhythm-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rhythm-option{border:1.5px solid #ddd;border-radius:12px;padding:.75rem;cursor:pointer;transition:all .25s;background:#fff;position:relative;overflow:hidden}
+.rhythm-option:hover{transform:translateY(-2px)}
+.rhythm-option:hover .ro-bg{opacity:1}
+.ro-bg{position:absolute;inset:0;opacity:0;transition:opacity .2s;pointer-events:none}
+.rhythm-option.vf:hover{border-color:#E24B4A}.rhythm-option.vf .ro-bg{background:#FCEBEB}
+.rhythm-option.pea:hover{border-color:#378ADD}.rhythm-option.pea .ro-bg{background:#E6F1FB}
+.rhythm-option.asys:hover{border-color:#888780}.rhythm-option.asys .ro-bg{background:#F1EFE8}
+.rhythm-option.rosc:hover{border-color:#1D9E75}.rhythm-option.rosc .ro-bg{background:#E1F5EE}
+.rhythm-option.faded{opacity:.2;pointer-events:none;transform:none}
+.ro-ecg{height:40px;width:100%;margin:.4rem 0;position:relative;z-index:1}
+.ro-label{font-size:13px;font-weight:600;position:relative;z-index:1}
+.ro-sub{font-size:11px;color:#888;margin-top:2px;position:relative;z-index:1}
+.rhythm-option.vf .ro-label{color:#791F1F}.rhythm-option.pea .ro-label{color:#0C447C}.rhythm-option.asys .ro-label{color:#5F5E5A}.rhythm-option.rosc .ro-label{color:#085041}
+.choices{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.choice{flex:1;min-width:120px;padding:9px 14px;border:1px solid #ddd;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;text-align:center;line-height:1.4;transition:all .2s;background:#fff;color:#666}
+.choice:hover{transform:translateY(-1px)}
+.choice.red{border-color:#E24B4A;color:#791F1F;background:#FFF5F5}
+.choice.blue{border-color:#378ADD;color:#0C447C;background:#F0F7FF}
+.choice.green{border-color:#639922;color:#27500A;background:#F3FBEA}
+.choice.amber{border-color:#BA7517;color:#633806;background:#FFFAF0}
+.choice.faded{opacity:.25;pointer-events:none}
+.next-btn{margin-top:.75rem;padding:8px 18px;border:1px solid #378ADD;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:#E6F1FB;color:#0C447C;display:inline-block}
+.next-btn:hover{background:#d4e9f7}
+.restart-btn{margin-top:1rem;padding:7px 16px;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;color:#666;display:block}
+.restart-btn:hover{background:#f5f5f3}
+.rhy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px}
+.rc{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:.9rem;cursor:pointer;transition:border-color .2s}
+.rc:hover{border-color:#185FA5}
+.rc-ecg{height:44px;margin:7px 0}
+.rc-detail{display:none;margin-top:8px;padding-top:8px;border-top:1px solid #f0f0ee;font-size:12px;line-height:1.7;color:#555}
+.rc.open .rc-detail{display:block}
+.qz{max-width:580px}
+.q-prog{font-size:13px;color:#888;margin-bottom:.4rem}
+.q-bar{background:#f0f0ee;border-radius:4px;height:4px;margin-bottom:1.25rem}
+.q-fill{background:#185FA5;height:4px;border-radius:4px;transition:width .3s}
+.q-text{font-size:15px;font-weight:500;line-height:1.6;margin-bottom:1.1rem}
+.q-opts{display:flex;flex-direction:column;gap:7px}
+.q-opt{padding:10px 14px;border:1px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;transition:all .2s;background:#fff}
+.q-opt:hover:not(.disabled){background:#f5f5f3}
+.q-opt.correct{background:#EAF3DE;color:#27500A;border-color:#639922}
+.q-opt.wrong{background:#FCEBEB;color:#791F1F;border-color:#E24B4A}
+.q-opt.disabled{cursor:default}
+.q-exp{margin-top:.9rem;padding:10px 14px;background:#E6F1FB;color:#0C447C;border-radius:8px;font-size:13px;line-height:1.6;display:none}
+.q-next{margin-top:.9rem;padding:7px 20px;border:1px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;background:#fff;display:none}
+.q-result{text-align:center;padding:2rem}
+.q-score{font-size:42px;font-weight:600;color:#185FA5;margin:.4rem 0}
+.q-restart{padding:7px 22px;border:1px solid #185FA5;border-radius:8px;cursor:pointer;font-size:13px;background:#fff;color:#185FA5;margin-top:1rem}
+.drip-card{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:1rem;margin-bottom:.75rem}
+.drip-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.drip-name{font-size:15px;font-weight:600}
+.drip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:7px}
+.drip-d{background:#f5f5f3;border-radius:8px;padding:7px 9px;text-align:center}
+.drip-dlbl{font-size:10px;color:#888;margin-bottom:2px}
+.drip-dval{font-size:16px;font-weight:600;color:#185FA5}
+.drip-dunit{font-size:10px;color:#aaa}
+.drip-note{font-size:11px;color:#aaa;margin-top:.5rem;padding-top:.5rem;border-top:1px solid #f0f0ee;line-height:1.5}
+.brose-row{display:flex;align-items:center;padding:9px 12px;margin-bottom:6px;border:1px solid #e5e5e3;border-radius:10px;background:#fff;transition:opacity .2s}
+.brose-row.dim{opacity:.25}
+.brose-row.active-band{outline:2px solid #185FA5;outline-offset:-1px}
+.brose-color{width:16px;height:16px;border-radius:3px;margin-right:10px;flex-shrink:0}
+.brose-details{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.brose-details span{font-size:11px;color:#888}
+@media(max-width:600px){.nav-tab{padding:.5rem .5rem;font-size:11px}.ds-val{font-size:14px}.loop-col{padding:.6rem}}
+</style>
+<body>
+<nav class="nav">
+  <div class="nav-brand"><span>PALS</span> 2020</div>
+  <div class="nav-tab active" onclick="SP('home',this)">🏠</div>
+  <div class="nav-tab" onclick="SP('algo',this)">Algorithm</div>
+  <div class="nav-tab" onclick="SP('calc',this)">Drug Doses</div>
+  <div class="nav-tab" onclick="SP('ett',this)">ETT</div>
+  <div class="nav-tab" onclick="SP('drip',this)">Drip</div>
+  <div class="nav-tab" onclick="SP('rhythm',this)">Rhythms</div>
+  <div class="nav-tab" onclick="SP('brose',this)">Broselow</div>
+  <div class="nav-tab" onclick="SP('quiz',this)">Quiz</div>
+</nav>
+
+<div class="sticky-hdr">
+  <div class="hdr-inner">
+    <div class="hdr-row">
+      <div class="hfield"><label>น้ำหนัก (kg)</label><input type="number" id="hwt" min="1" max="120" step="0.1" placeholder="15" oninput="hCalcWt()"></div>
+      <div class="or-sep">หรือ</div>
+      <div class="hfield"><label>อายุ</label><input type="number" id="hage" min="0" max="216" step="1" placeholder="3" oninput="hCalcAge()"></div>
+      <div class="hfield"><label>หน่วย</label><select id="hageunit" onchange="hCalcAge()"><option value="mo">เดือน</option><option value="yr">ปี</option></select></div>
+    </div>
+    <div class="dose-strip">
+      <div class="ds"><div class="ds-lbl">น้ำหนัก</div><div class="ds-val" id="hd-wt" style="font-size:13px;color:#aaa">—</div></div>
+      <div class="ds"><div class="ds-lbl">Epi arrest</div><div class="ds-val red" id="hd-epi">—</div><div class="ds-unit">mg IV/IO</div></div>
+      <div class="ds"><div class="ds-lbl">Defib 1st</div><div class="ds-val red" id="hd-d1">—</div><div class="ds-unit">2 J/kg</div></div>
+      <div class="ds"><div class="ds-lbl">Defib 2nd+</div><div class="ds-val red" id="hd-d2">—</div><div class="ds-unit">4 J/kg</div></div>
+      <div class="ds"><div class="ds-lbl">Cardiovert</div><div class="ds-val" style="color:#854F0B" id="hd-cv">—</div><div class="ds-unit">0.5 J/kg</div></div>
+      <div class="ds"><div class="ds-lbl">Amio</div><div class="ds-val" id="hd-amio">—</div><div class="ds-unit">mg bolus</div></div>
+      <div class="ds"><div class="ds-lbl">Fluid</div><div class="ds-val" id="hd-fl">—</div><div class="ds-unit">20 mL/kg</div></div>
+      <div class="ds"><div class="ds-lbl">Adenosine</div><div class="ds-val" style="color:#0F6E56" id="hd-aden">—</div><div class="ds-unit">0.1 mg/kg</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="home" class="page active">
+  <div class="hero">
+    <span class="badge b-blue" style="margin-bottom:8px;display:inline-block">AHA PALS 2020</span>
+    <h1>Pediatric Advanced Life Support</h1>
+    <p>Interactive algorithm · Drug doses · ETT · Drip rates · Broselow · Quiz</p>
+  </div>
+  <div class="home-grid">
+    <div class="hc" onclick="SP('algo',document.querySelectorAll('.nav-tab')[1])"><div class="hc-icon">🔀</div><h3>Algorithm</h3><p>Interactive step-by-step เลือก path</p></div>
+    <div class="hc" onclick="SP('calc',document.querySelectorAll('.nav-tab')[2])"><div class="hc-icon">💊</div><h3>Drug Doses</h3><p>คำนวณตามน้ำหนัก/อายุ</p></div>
+    <div class="hc" onclick="SP('ett',document.querySelectorAll('.nav-tab')[3])"><div class="hc-icon">🫁</div><h3>ETT / Airway</h3><p>ETT size, depth, LMA, blade</p></div>
+    <div class="hc" onclick="SP('drip',document.querySelectorAll('.nav-tab')[4])"><div class="hc-icon">💧</div><h3>Drip Rates</h3><p>Epi, Dopa, Dobu, Norepi</p></div>
+    <div class="hc" onclick="SP('rhythm',document.querySelectorAll('.nav-tab')[5])"><div class="hc-icon">📈</div><h3>Rhythms</h3><p>VF, pVT, PEA, SVT, VT</p></div>
+    <div class="hc" onclick="SP('brose',document.querySelectorAll('.nav-tab')[6])"><div class="hc-icon">🎨</div><h3>Broselow</h3><p>Color band ตามน้ำหนัก</p></div>
+    <div class="hc" onclick="SP('quiz',document.querySelectorAll('.nav-tab')[7])"><div class="hc-icon">📝</div><h3>Quiz</h3><p>10 ข้อ พร้อมเฉลย</p></div>
+  </div>
+  <div style="background:#fff;border:1px solid #e5e5e3;border-left:4px solid #E24B4A;border-radius:12px;padding:1rem;margin-top:1rem">
+    <p style="font-size:13px;font-weight:600;margin-bottom:.5rem">⚠️ กรอกน้ำหนัก/อายุด้านบน — dose ขึ้นตลอดทุกหน้า</p>
+    <div class="key-num">
+      <div class="kn"><strong>0.01 mg/kg</strong>Epinephrine</div>
+      <div class="kn"><strong>5 mg/kg</strong>Amiodarone</div>
+      <div class="kn"><strong>2 → 4 J/kg</strong>Defibrillation</div>
+      <div class="kn"><strong>0.5 → 1 J/kg</strong>Cardioversion</div>
+      <div class="kn"><strong>100–120/min</strong>CPR rate</div>
+      <div class="kn"><strong>94–99%</strong>Post-ROSC SpO₂</div>
+    </div>
+  </div>
+</div>
+
+<div id="algo" class="page">
+  <div class="algo-btns">
+    <button class="ab active" onclick="loadAlgo('arrest',this)">❤️ Cardiac Arrest</button>
+    <button class="ab" onclick="loadAlgo('brady',this)">⬇️ Bradycardia</button>
+    <button class="ab" onclick="loadAlgo('tachy',this)">⬆️ Tachycardia</button>
+    <button class="ab" onclick="loadAlgo('rosc',this)">✅ Post-ROSC</button>
+  </div>
+  <div class="algo-resus-bar" id="resus-bar" style="display:none">
+    <div class="arb-label"><i class="ti ti-clock" aria-hidden="true"></i> เวลา resus</div>
+    <div class="arb-disp" id="main-timer">0:00</div>
+    <button class="arb-btn go" id="main-tbtn" onclick="toggleMainTimer()">▶ เริ่ม</button>
+    <button class="arb-btn" onclick="resetMainTimer()">↺</button>
+    <div class="arb-cycle">รอบ CPR: <strong id="cycle-count">0</strong></div>
+  </div>
+  <div class="epi-bar" id="epi-bar-wrap" style="display:none">
+    <div class="drug-pill dp-epi" id="dp-epi"><span class="pill-lbl">💊 Epinephrine</span><span class="pill-val" id="epi-val">ยังไม่ได้ให้</span></div>
+  </div>
+  <div class="steps" id="algo-steps"></div>
+</div>
+
+<div id="calc" class="page">
+  <div class="tabs"><div class="tab active" onclick="SDT('wt',this,'calc')">น้ำหนักจริง (kg)</div><div class="tab" onclick="SDT('age',this,'calc')">ประมาณจากอายุ</div></div>
+  <div id="calc-wt" class="panel active">
+    <div class="input-row"><div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="cw" min="1" max="120" step="0.1" placeholder="15" oninput="computeDose('wt')"></div><button class="clear-btn" onclick="document.getElementById('cw').value='';computeDose('wt')">✕</button></div>
+    <div id="ci-wt" class="info-bar"></div><div id="cr-wt"><div class="empty">ใส่น้ำหนัก kg</div></div>
+  </div>
+  <div id="calc-age" class="panel">
+    <div class="input-row"><div class="field"><label>อายุ</label><input type="number" id="ca" min="0" max="216" step="1" placeholder="3" oninput="computeDose('age')"></div><div class="field"><label>หน่วย</label><select id="cu" onchange="computeDose('age')"><option value="mo">เดือน</option><option value="yr">ปี</option></select></div><button class="clear-btn" onclick="document.getElementById('ca').value='';computeDose('age')">✕</button></div>
+    <p style="font-size:12px;color:#aaa;margin-bottom:1rem">Nelson: &lt;12mo=(age+9)/2 · 1–5yr=2×(age+4) · 6–12yr=3×age+7</p>
+    <div id="ci-age" class="info-bar"></div><div id="cr-age"><div class="empty">ใส่อายุ</div></div>
+  </div>
+</div>
+
+<div id="ett" class="page">
+  <div class="tabs"><div class="tab active" onclick="SDT('wt',this,'ett')">น้ำหนักจริง (kg)</div><div class="tab" onclick="SDT('age',this,'ett')">ประมาณจากอายุ</div></div>
+  <div id="ett-wt" class="panel active">
+    <div class="input-row"><div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="ew" min="1" max="120" step="0.1" placeholder="15" oninput="computeETT('wt')"></div><button class="clear-btn" onclick="document.getElementById('ew').value='';computeETT('wt')">✕</button></div>
+    <div id="ei-wt" class="info-bar"></div><div id="er-wt"><div class="empty">ใส่น้ำหนัก kg</div></div>
+  </div>
+  <div id="ett-age" class="panel">
+    <div class="input-row"><div class="field"><label>อายุ</label><input type="number" id="ea" min="0" max="216" step="1" placeholder="3" oninput="computeETT('age')"></div><div class="field"><label>หน่วย</label><select id="eu" onchange="computeETT('age')"><option value="mo">เดือน</option><option value="yr">ปี</option></select></div><button class="clear-btn" onclick="document.getElementById('ea').value='';computeETT('age')">✕</button></div>
+    <div id="ei-age" class="info-bar"></div><div id="er-age"><div class="empty">ใส่อายุ</div></div>
+  </div>
+</div>
+
+<div id="drip" class="page">
+  <div class="input-row"><div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="dw" min="1" max="120" step="0.1" placeholder="15" oninput="computeDrip()"></div><button class="clear-btn" onclick="document.getElementById('dw').value='';computeDrip()">✕</button></div>
+  <div id="dr-res"><div class="empty">ใส่น้ำหนัก kg เพื่อคำนวณ drip rates</div></div>
+</div>
+
+<div id="brose" class="page">
+  <div class="input-row"><div class="field"><label>น้ำหนัก (kg)</label><input type="number" id="bw" min="1" max="36" step="0.1" placeholder="15" oninput="computeBrose()"></div><button class="clear-btn" onclick="document.getElementById('bw').value='';computeBrose()">✕</button></div>
+  <div id="br-res"></div>
+</div>
+
+<div id="quiz" class="page"><div class="qz" id="quiz-container"></div></div>
+<div id="rhythm" class="page">
+  <div class="rhy-grid">
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-red">Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">Ventricular Fibrillation (VF)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><path d="M0,22 C5,6 8,36 12,13 C16,3 18,40 22,18 C26,3 29,38 33,16 C37,6 40,36 44,13 C48,3 50,40 54,18 C58,3 61,38 65,16 C69,6 72,36 76,13 C80,3 82,40 86,18 C90,3 93,38 97,16 C101,6 104,36 108,13 C112,3 114,40 118,18 C122,3 125,38 129,16 C133,6 136,36 140,13 C144,3 146,40 150,18 C154,3 157,38 161,16 C165,6 168,36 172,13 C176,3 178,40 182,18 C186,3 189,38 193,16 C197,6 199,36 200,22" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Chaotic · no organized activity</div>
+      <div class="rc-detail"><strong>Tx:</strong> Defib 2 J/kg → CPR 2 min → Epi → Defib 4 J/kg → Amio 5 mg/kg<br><strong>จำ:</strong> Shock ก่อน · minimize hands-off time</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-red">Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">Pulseless VT (pVT)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><path d="M0,30 L18,30 L21,8 L24,38 L27,8 L30,38 L33,30 L51,30 L54,8 L57,38 L60,8 L63,38 L66,30 L84,30 L87,8 L90,38 L93,8 L96,38 L99,30 L117,30 L120,8 L123,38 L126,8 L129,38 L132,30 L150,30 L153,8 L156,38 L159,8 L162,38 L165,30 L183,30 L186,8 L189,38 L192,8 L195,38 L200,30" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Wide QRS, regular · ไม่มี pulse</div>
+      <div class="rc-detail"><strong>Tx:</strong> Treat as VF — Defib + CPR<br><strong>จำ:</strong> ไม่มี pulse = treat as VF</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-blue">Non-Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">PEA</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><line x1="0" y1="30" x2="18" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M18,30 L22,26 L24,10 L26,38 L28,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="28" y1="30" x2="68" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M68,30 L72,26 L74,10 L76,38 L78,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="78" y1="30" x2="118" y2="30" stroke="#378ADD" stroke-width="1.5"/><path d="M118,30 L122,26 L124,10 L126,38 L128,30" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="128" y1="30" x2="200" y2="30" stroke="#378ADD" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Organized ECG · ไม่มี pulse</div>
+      <div class="rc-detail"><strong>Tx:</strong> CPR + Epi ทุก 3–5 นาที + H's &amp; T's<br><strong>จำ:</strong> ECG ดูดี แต่ไม่มี pulse → H's &amp; T's!</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-blue">Non-Shockable</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">Asystole</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><line x1="0" y1="22" x2="200" y2="22" stroke="#aaa" stroke-width="1.5" stroke-dasharray="4,3"/></svg></div>
+      <div style="font-size:11px;color:#888">Flat line · ยืนยัน ≥2 leads</div>
+      <div class="rc-detail"><strong>Tx:</strong> CPR + Epi ทุก 3–5 นาที · ห้าม shock<br><strong>จำ:</strong> ยืนยัน 2 leads · ห้าม shock asystole</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-amber">Tachyarrhythmia</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">SVT (Narrow QRS)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><line x1="0" y1="30" x2="8" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M8,30 L9,28 L10,10 L11,40 L12,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="12" y1="30" x2="20" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M20,30 L21,28 L22,10 L23,40 L24,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="24" y1="30" x2="32" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M32,30 L33,28 L34,10 L35,40 L36,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="36" y1="30" x2="44" y2="30" stroke="#BA7517" stroke-width="1.5"/><path d="M44,30 L45,28 L46,10 L47,40 L48,30" fill="none" stroke="#BA7517" stroke-width="1.5"/><line x1="48" y1="30" x2="200" y2="30" stroke="#BA7517" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Regular narrow · HR &gt;220 infant / &gt;180 child</div>
+      <div class="rc-detail"><strong>Stable:</strong> Vagal → Adenosine 0.1→0.2 mg/kg<br><strong>Unstable:</strong> Cardioversion 0.5–1 J/kg<br><strong>จำ:</strong> SVT infant มักสูงกว่า 220</div>
+    </div>
+    <div class="rc" onclick="this.classList.toggle('open')">
+      <span class="badge b-red">Tachyarrhythmia</span>
+      <div style="font-weight:600;margin-top:6px;font-size:13px">VT with pulse (Wide QRS)</div>
+      <div class="rc-ecg"><svg viewBox="0 0 200 44" style="width:100%;height:100%"><path d="M0,30 L18,30 L21,8 L24,38 L27,8 L30,38 L33,30 L51,30 L54,8 L57,38 L60,8 L63,38 L66,30 L84,30 L87,8 L90,38 L93,8 L96,38 L99,30 L117,30 L120,8 L123,38 L126,8 L129,38 L132,30 L150,30" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg></div>
+      <div style="font-size:11px;color:#888">Wide QRS ≥0.09s · มี pulse</div>
+      <div class="rc-detail"><strong>Stable:</strong> Amio 5 mg/kg over 20–60 min<br><strong>Unstable:</strong> Cardioversion 0.5→1 J/kg<br><strong>จำ:</strong> Wide+pulse+stable → Amio</div>
+    </div>
+  </div>
+</div>
+<script>
+const rc=(n,d=2)=>parseFloat(n.toFixed(d));
+const clamp=(v,a,b)=>Math.min(Math.max(v,a),b);
+function estWt(mo){if(mo<1)return 3.5;if(mo<=12)return(mo+9)/2;const y=mo/12;if(y<=5)return 2*(y+4);if(y<=12)return 3*y+7;return Math.min(2.4*y+8,70);}
+function fmt(s){return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+
+/* ─── NAV ─── */
+function SP(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(el&&el.classList)el.classList.add('active');
+  if(id==='quiz'&&qCur===0)renderQ();
+  if(id==='brose')computeBrose();
+}
+function SDT(t,el,page){const wrap=document.getElementById(page);wrap.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));wrap.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById(page+'-'+t).classList.add('active');}
+
+/* ─── STICKY HEADER DOSES ─── */
+function updateHdrDoses(wt){
+  document.getElementById('hd-wt').textContent=rc(wt,1)+' kg';document.getElementById('hd-wt').style.color='#185FA5';
+  document.getElementById('hd-epi').textContent=rc(clamp(wt*.01,.001,1),3)+' mg';
+  document.getElementById('hd-d1').textContent=rc(clamp(wt*2,2,200))+' J';
+  document.getElementById('hd-d2').textContent=rc(clamp(wt*4,4,200))+' J';
+  document.getElementById('hd-cv').textContent=rc(clamp(wt*.5,.5,50),1)+' J';
+  document.getElementById('hd-amio').textContent=rc(clamp(wt*5,5,300))+' mg';
+  document.getElementById('hd-fl').textContent=rc(clamp(wt*20,20,1000))+' mL';
+  document.getElementById('hd-aden').textContent=rc(clamp(wt*.1,.1,6),1)+' mg';
+}
+function hCalcWt(){const wt=parseFloat(document.getElementById('hwt').value);if(!wt||wt<=0)return;document.getElementById('hage').value='';updateHdrDoses(wt);}
+function hCalcAge(){const av=parseFloat(document.getElementById('hage').value);const au=document.getElementById('hageunit').value;if(!av||av<0)return;document.getElementById('hwt').value='';const mo=au==='yr'?av*12:av;updateHdrDoses(estWt(mo));}
+
+/* ─── ECG SVG ─── */
+const ECG={
+  vf:`<svg viewBox="0 0 200 40" width="100%" height="40"><path d="M0,20 C4,6 7,34 11,12 C14,2 17,38 20,17 C23,3 26,36 30,14 C33,5 36,35 40,12 C43,3 46,38 50,17 C53,3 56,36 60,14 C63,5 66,35 70,12 C73,3 76,38 80,17 C83,3 86,36 90,14 C93,5 96,35 100,12 C103,3 106,38 110,17 C113,3 116,36 120,14 C123,5 126,35 130,12 C133,3 136,38 140,17 C143,3 146,36 150,14 C153,5 156,35 160,12 C163,3 166,38 170,17 C173,3 176,36 180,14 C183,5 186,35 190,12 C193,3 196,38 200,20" fill="none" stroke="#E24B4A" stroke-width="1.5"/></svg>`,
+  pea:`<svg viewBox="0 0 200 40" width="100%" height="40"><line x1="0" y1="28" x2="18" y2="28" stroke="#378ADD" stroke-width="1.5"/><path d="M18,28 L21,24 L23,8 L25,36 L27,28" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="27" y1="28" x2="75" y2="28" stroke="#378ADD" stroke-width="1.5"/><path d="M75,28 L78,24 L80,8 L82,36 L84,28" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="84" y1="28" x2="132" y2="28" stroke="#378ADD" stroke-width="1.5"/><path d="M132,28 L135,24 L137,8 L139,36 L141,28" fill="none" stroke="#378ADD" stroke-width="1.5"/><line x1="141" y1="28" x2="200" y2="28" stroke="#378ADD" stroke-width="1.5"/></svg>`,
+  asys:`<svg viewBox="0 0 200 40" width="100%" height="40"><line x1="0" y1="20" x2="200" y2="20" stroke="#888780" stroke-width="1.5" stroke-dasharray="4,3"/></svg>`,
+  rosc:`<svg viewBox="0 0 200 40" width="100%" height="40"><line x1="0" y1="28" x2="22" y2="28" stroke="#1D9E75" stroke-width="1.5"/><path d="M22,28 L25,24 L27,8 L29,36 L31,28" fill="none" stroke="#1D9E75" stroke-width="1.5"/><line x1="31" y1="28" x2="65" y2="28" stroke="#1D9E75" stroke-width="1.5"/><path d="M65,28 L68,24 L70,8 L72,36 L74,28" fill="none" stroke="#1D9E75" stroke-width="1.5"/><line x1="74" y1="28" x2="108" y2="28" stroke="#1D9E75" stroke-width="1.5"/><path d="M108,28 L111,24 L113,8 L115,36 L117,28" fill="none" stroke="#1D9E75" stroke-width="1.5"/><line x1="117" y1="28" x2="200" y2="28" stroke="#1D9E75" stroke-width="1.5"/><text font-size="9" fill="#1D9E75" x="160" y="18">pulse!</text></svg>`,
+};
+
+/* ─── RESUS TIMER (arrest only) ─── */
+let mInt=null,mSec=0,mRun=false;
+function toggleMainTimer(){
+  if(mRun){clearInterval(mInt);mRun=false;document.getElementById('main-tbtn').innerHTML='▶ ต่อ';document.getElementById('main-tbtn').className='arb-btn go';}
+  else{mRun=true;document.getElementById('main-tbtn').innerHTML='⏸ หยุด';document.getElementById('main-tbtn').className='arb-btn stop';
+    mInt=setInterval(()=>{mSec++;document.getElementById('main-timer').textContent=fmt(mSec);document.getElementById('main-timer').className='arb-disp running';},1000);}
+}
+function resetMainTimer(){clearInterval(mInt);mRun=false;mSec=0;document.getElementById('main-timer').textContent='0:00';document.getElementById('main-timer').className='arb-disp';document.getElementById('main-tbtn').innerHTML='▶ เริ่ม';document.getElementById('main-tbtn').className='arb-btn go';}
+
+/* ─── CPR + EPI TIMERS ─── */
+let cprInt=null,cprSec=0,currentCprId=null;
+function startCprTimer(colId){
+  if(cprInt)clearInterval(cprInt);
+  currentCprId=colId;cprSec=120;
+  const col=document.getElementById(colId)?.closest('.cpr-col');
+  if(col){col.classList.add('running');col.classList.remove('done');}
+  updateCprDisplay();
+  cprInt=setInterval(()=>{cprSec--;updateCprDisplay();if(cprSec<=0){clearInterval(cprInt);cprInt=null;const el=document.getElementById(currentCprId);if(el){el.textContent='✓ ครบ 2 นาที';const c=el.closest('.cpr-col');if(c){c.classList.remove('running');c.classList.add('done');}}}},1000);
+}
+function updateCprDisplay(){const el=document.getElementById(currentCprId);if(!el)return;el.textContent=cprSec>0?fmt(cprSec):'✓ ครบ 2 นาที';}
+
+let epiTimerInt=null,epiTimerSec=0,epiCount=0;
+function startEpiTimer(){
+  if(epiTimerInt)clearInterval(epiTimerInt);
+  epiTimerSec=300;tickEpi();
+  epiTimerInt=setInterval(()=>{epiTimerSec--;tickEpi();if(epiTimerSec<=0){clearInterval(epiTimerInt);epiTimerInt=null;fireEpiDue();}},1000);
+}
+function tickEpi(){
+  const txt=fmt(epiTimerSec);
+  document.querySelectorAll('.epi-next:not(.due)').forEach(el=>el.textContent=`dose ถัดไปใน ${txt}`);
+  if(epiTimerSec>0){document.getElementById('epi-val').textContent=`ให้แล้ว ${epiCount} dose · ถัดไปใน ${txt}`;document.getElementById('dp-epi').className=`drug-pill ${epiTimerSec<=60?'dp-epi-due':'dp-epi-timer'}`;}
+}
+function fireEpiDue(){
+  document.querySelectorAll('.epi-next').forEach(el=>{el.textContent='ถึงเวลา dose ถัดไปแล้ว!';el.classList.add('due');});
+  document.getElementById('epi-val').textContent=`ถึงเวลา dose ${epiCount+1}!`;
+  document.getElementById('dp-epi').className='drug-pill dp-epi-due';
+}
+</script>
+<script>
+/* ═══════════ ARREST (loop-based) ═══════════ */
+let amioCount=0,htShown=false,cycle=0,shownSteps=[],pendingQueue=[],curAlgo='arrest';
+
+function pressShock(btnId,cprColId,defibVal){
+  const btn=document.getElementById(btnId);if(!btn||btn.classList.contains('done'))return;
+  btn.classList.add('done');btn.textContent='✓ Shocked '+defibVal;startCprTimer(cprColId);
+}
+
+function buildLoopShock(n){
+  const isFirst=n===1,defibVal=isFirst?'2 J/kg':'4 J/kg';
+  const cprColId=`cpr-val-${n}`,shockBtnId=`shock-btn-${n}`;
+  epiCount++;setTimeout(startEpiTimer,50);
+  setTimeout(()=>{document.getElementById('epi-val').textContent=`ให้แล้ว ${epiCount} dose · 5:00`;document.getElementById('dp-epi').className='drug-pill dp-epi-timer';},80);
+  const showAmio=n>=2;let amioHTML='';
+  if(showAmio){amioCount++;const maxed=amioCount>=3;
+    amioHTML=`<div class="loop-col amio-col${maxed?' maxed':''}"><div class="lc-lbl">Amiodarone</div><div class="lc-val">${maxed?`⚠️ ครบ max ${amioCount}/3`:`dose ${amioCount}/3`}</div><div class="lc-sub">${maxed?'พิจารณา Lidocaine':'5 mg/kg IV/IO · max 300 mg'}</div></div>`;}
+  const numCols=showAmio?4:3;
+  return`<div class="loop-card shock"><div class="loop-header">⚡ รอบที่ ${n} · Shockable — VF/pVT</div><div class="loop-cols" style="grid-template-columns:repeat(${numCols},1fr)">
+    <div class="loop-col defib-col"><div class="lc-lbl">Defibrillation</div><div class="lc-val">${defibVal}</div><div class="lc-sub">ชาร์จ → clear</div><button class="shock-btn" id="${shockBtnId}" onclick="pressShock('${shockBtnId}','${cprColId}','${defibVal}')">⚡ กด Shock</button></div>
+    <div class="loop-col cpr-col" id="cpr-c-${n}"><div class="lc-lbl">⏱ CPR</div><div class="lc-val" id="${cprColId}">—</div><div class="lc-sub">เริ่มทันทีหลัง shock</div></div>
+    <div class="loop-col epi-col"><div class="lc-lbl">Epinephrine</div><div class="lc-val">0.01 mg/kg IV/IO</div><div class="epi-next">dose ถัดไปใน 5:00</div></div>
+    ${amioHTML}</div></div>`;
+}
+function buildLoopNS(n){
+  const cprColId=`cpr-val-${n}`;
+  epiCount++;setTimeout(startEpiTimer,50);
+  setTimeout(()=>{document.getElementById('epi-val').textContent=`ให้แล้ว ${epiCount} dose · 5:00`;document.getElementById('dp-epi').className='drug-pill dp-epi-timer';},80);
+  setTimeout(()=>startCprTimer(cprColId),120);
+  return`<div class="loop-card nonshock"><div class="loop-header">📈 รอบที่ ${n} · Non-shockable — PEA/Asystole</div><div class="loop-cols" style="grid-template-columns:1fr 1fr">
+    <div class="loop-col cpr-col running" id="cpr-c-${n}"><div class="lc-lbl">⏱ CPR</div><div class="lc-val" id="${cprColId}">2:00</div><div class="lc-sub">min interruptions</div></div>
+    <div class="loop-col epi-col"><div class="lc-lbl">Epinephrine</div><div class="lc-val">0.01 mg/kg IV/IO</div><div class="epi-next">dose ถัดไปใน 5:00</div></div></div></div>`;
+}
+function rhythmCardHTML(stepId){
+  return`<div class="rhythm-check-card"><div class="rhythm-title">ทุก 2 นาที</div><div class="rhythm-prompt">เลือก rhythm ที่เห็นใน monitor</div><div class="rhythm-grid">
+    <div class="rhythm-option vf" id="ro-${stepId}-shock" onclick="chooseRhythm('${stepId}','shock')"><div class="ro-bg"></div><div class="ro-ecg">${ECG.vf}</div><div class="ro-label">VF / pVT</div><div class="ro-sub">Shockable</div></div>
+    <div class="rhythm-option pea" id="ro-${stepId}-pea" onclick="chooseRhythm('${stepId}','nonshock')"><div class="ro-bg"></div><div class="ro-ecg">${ECG.pea}</div><div class="ro-label">PEA</div><div class="ro-sub">Non-shockable</div></div>
+    <div class="rhythm-option asys" id="ro-${stepId}-asys" onclick="chooseRhythm('${stepId}','nonshock')"><div class="ro-bg"></div><div class="ro-ecg">${ECG.asys}</div><div class="ro-label">Asystole</div><div class="ro-sub">Non-shockable</div></div>
+    <div class="rhythm-option rosc" id="ro-${stepId}-rosc" onclick="chooseRhythm('${stepId}','rosc')"><div class="ro-bg"></div><div class="ro-ecg">${ECG.rosc}</div><div class="ro-label">ROSC</div><div class="ro-sub">มี pulse กลับมา</div></div>
+  </div></div>`;
+}
+function chooseRhythm(stepId,val){
+  document.querySelectorAll(`[id^="ro-${stepId}-"]`).forEach(el=>el.classList.add('faded'));
+  cycle++;document.getElementById('cycle-count').textContent=cycle;
+  if(val==='rosc'){if(epiTimerInt)clearInterval(epiTimerInt);if(cprInt)clearInterval(cprInt);
+    appendStep({id:'rosc-end',type:'end-good',tag:'ROSC',title:'มี pulse! → Post-ROSC care',sub:'หยุด CPR · กดปุ่ม Post-ROSC ด้านบนเพื่อดู algorithm ต่อ'},true);pendingQueue=[];return;}
+  const steps=val==='shock'?getShockSteps(cycle):getNonShockSteps(cycle);
+  pendingQueue=[...steps];appendStep(pendingQueue.shift(),true);
+}
+function getShockSteps(n){
+  const steps=[{id:`sl-${n}`,isLoop:true,loopBuilder:()=>buildLoopShock(n)}];
+  if(!htShown){htShown=true;steps.push({id:`sht-${n}`,type:'action',tag:"H's & T's",title:"ค้นหาสาเหตุ reversible",sub:"Hypoxia · Hypovolemia · Hypo/Hyperkalemia · Hypothermia\nTension PTX · Tamponade · Toxins · Thrombosis"});}
+  steps.push({id:`sr-${n}`,isRhythm:true});return steps;
+}
+function getNonShockSteps(n){
+  const steps=[{id:`nl-${n}`,isLoop:true,loopBuilder:()=>buildLoopNS(n)}];
+  if(!htShown){htShown=true;steps.push({id:`nht-${n}`,type:'action',tag:"H's & T's",title:"ค้นหาสาเหตุ reversible",sub:"Hypoxia→O₂/airway · Hypovolemia→fluid · Hyperkalemia→CaCl₂\nTension PTX→needle decompress · Tamponade→pericardiocentesis"});}
+  steps.push({id:`nr-${n}`,isRhythm:true});return steps;
+}
+</script>
+<script>
+/* ═══════════ LINEAR ALGORITHMS (brady/tachy/rosc) ═══════════ */
+const LINEAR={
+brady:[
+  {id:'b0',type:'start',tag:'จุดเริ่มต้น',title:'Bradycardia with pulse · HR < 60/min',sub:'เด็กที่ยังมี pulse แต่ HR ช้าผิดปกติ'},
+  {id:'b1',type:'action',tag:'ประเมิน',title:'ABCs · O₂ · Monitor · 12-lead ECG',sub:'ให้ O₂ · attach monitor · วัด BP · IV/IO access'},
+  {id:'b-q1',isChoice:true,tag:'ประเมิน',title:'มี poor perfusion หรือไม่?',sub:'Altered mental · Hypotension · Poor cap refill · Signs of shock',
+    choices:[{text:'ไม่มี\nสัญญาณคงที่',cls:'green',next:'b-stable'},{text:'มี\nPoor perfusion',cls:'red',next:'b-unstable'}]},
+  {id:'b-stable',type:'end-good',tag:'Stable',title:'Observe + Support ABCs',sub:'Monitor closely · ค้นหาสาเหตุ · Consult cardiology',isEnd:true},
+  {id:'b-unstable',type:'critical',tag:'Unstable',title:'Treat reversible causes ก่อน',sub:'Hypoxia→O₂/airway · Hypothermia→warm · Drug effect→antidote · Heart block→pacing',next:'b-q2'},
+  {id:'b-q2',isChoice:true,tag:'ตอบสนอง?',title:'ตอบสนองต่อ O₂ และ treatment?',
+    choices:[{text:'ดีขึ้น\nHR > 60',cls:'green',next:'b-improved'},{text:'ยังคงมี\nbradycardia',cls:'red',next:'b-atropine'}]},
+  {id:'b-improved',type:'end-good',tag:'Good',title:'Monitor + Observe',sub:'ติดตาม HR และ perfusion · หาสาเหตุต่อไป',isEnd:true},
+  {id:'b-atropine',type:'drug',tag:'First line',title:'Atropine 0.02 mg/kg IV/IO',sub:'min 0.1 mg · max 0.5 mg/dose · repeat 1 ครั้ง\n⚠️ dose < 0.1 mg → paradoxical bradycardia',next:'b-q3'},
+  {id:'b-q3',isChoice:true,tag:'ตอบสนอง?',title:'HR ดีขึ้นหลัง Atropine?',
+    choices:[{text:'ดีขึ้น',cls:'green',next:'b-improved'},{text:'ไม่ดีขึ้น',cls:'red',next:'b-pace'}]},
+  {id:'b-pace',type:'critical',tag:'Second line',title:'Transcutaneous Pacing หรือ Epi infusion',sub:'Pacing: titrate จนได้ capture\nEpi infusion: 0.1–1 mcg/kg/min · Dopamine: 2–20 mcg/kg/min',next:'b-cpr'},
+  {id:'b-cpr',type:'critical',tag:'Emergency',title:'HR < 60 + ไม่ตอบสนอง → Start CPR',sub:'เริ่ม CPR ทันที · ไปที่ Cardiac Arrest algorithm',isEnd:true},
+],
+tachy:[
+  {id:'t0',type:'start',tag:'จุดเริ่มต้น',title:'Tachycardia with pulse',sub:'HR เร็วผิดปกติ + มี pulse'},
+  {id:'t1',type:'action',tag:'ประเมิน',title:'ABCs · O₂ · Monitor · 12-lead ECG',sub:'IV/IO access · ดู QRS width · วัด BP · ประเมิน perfusion'},
+  {id:'t-q1',isChoice:true,tag:'QRS width',title:'QRS width เป็นเท่าไหร่?',
+    choices:[{text:'Narrow QRS\n< 0.09 sec',cls:'blue',next:'t-nq'},{text:'Wide QRS\n≥ 0.09 sec',cls:'red',next:'t-wq'}]},
+  {id:'t-nq',isChoice:true,tag:'Narrow QRS',title:'Hemodynamically stable?',
+    choices:[{text:'Unstable\nAMS/Hypotension',cls:'red',next:'t-nq-unstable'},{text:'Stable\nPerfusing well',cls:'green',next:'t-vagal'}]},
+  {id:'t-nq-unstable',type:'critical',tag:'Narrow + Unstable',title:'Synchronized Cardioversion 0.5 J/kg',sub:'0.5→1→2 J/kg · Sedate ก่อนถ้าเวลาอนุญาต · อย่าล่าช้า',isEnd:true},
+  {id:'t-vagal',type:'action',tag:'Narrow + Stable',title:'Vagal maneuver ก่อน',sub:'>1 ปี: Valsalva · ทารก: ice pack บนหน้า 15–30 วิ\nห้าม carotid massage ในเด็ก',next:'t-q-vagal'},
+  {id:'t-q-vagal',isChoice:true,tag:'Vagal',title:'ตอบสนองต่อ vagal?',
+    choices:[{text:'Converted\nกลับ sinus',cls:'green',next:'t-converted'},{text:'ไม่ตอบสนอง',cls:'amber',next:'t-adeno'}]},
+  {id:'t-adeno',type:'drug',tag:'SVT drug',title:'Adenosine 0.1 mg/kg IV rapid push',sub:'max 6 mg · flush NS ทันที · ถ้าไม่ได้ผล: 0.2 mg/kg (max 12 mg)',next:'t-q-adeno'},
+  {id:'t-q-adeno',isChoice:true,tag:'Adenosine',title:'ตอบสนองต่อ Adenosine?',
+    choices:[{text:'Converted',cls:'green',next:'t-converted'},{text:'ไม่ตอบสนอง',cls:'red',next:'t-cardio'}]},
+  {id:'t-cardio',type:'critical',tag:'Refractory SVT',title:'Synchronized Cardioversion 0.5 J/kg',sub:'Sedate ก่อน · 0.5→1→2 J/kg · Expert consult',isEnd:true},
+  {id:'t-converted',type:'end-good',tag:'Converted',title:'Monitor + หาสาเหตุ',sub:'Monitor ต่อเนื่อง · 12-lead post-conversion · Consult cardiology',isEnd:true},
+  {id:'t-wq',isChoice:true,tag:'Wide QRS',title:'Hemodynamically stable?',sub:'Wide QRS = VT until proven otherwise',
+    choices:[{text:'Unstable',cls:'red',next:'t-wq-unstable'},{text:'Stable',cls:'green',next:'t-wq-stable'}]},
+  {id:'t-wq-unstable',type:'critical',tag:'Wide + Unstable',title:'Synchronized Cardioversion 0.5 J/kg',sub:'0.5→1→2 J/kg · Sedate ก่อน · Expert consult ขณะทำ',isEnd:true},
+  {id:'t-wq-stable',type:'drug',tag:'Wide + Stable (VT)',title:'Amiodarone 5 mg/kg IV over 20–60 min',sub:'max 300 mg · monitor BP · หรือ Procainamide 15 mg/kg · Expert consult',isEnd:true},
+],
+rosc:[
+  {id:'r0',type:'start',tag:'จุดเริ่มต้น',title:'ROSC — Return of Spontaneous Circulation',sub:'มี pulse กลับมา · เริ่ม post-resuscitation care ทันที'},
+  {id:'r1',type:'action',tag:'Airway',title:'ยืนยัน advanced airway + waveform capnography',sub:'Confirm ETT: auscultation + waveform capno · Secure tube'},
+  {id:'r2',type:'critical',tag:'Breathing',title:'Avoid hyperoxia + hyperventilation',sub:'Target SpO₂ 94–99% · titrate FiO₂ · EtCO₂ 35–40 mmHg · RR ตามอายุ'},
+  {id:'r-q1',isChoice:true,tag:'Hemodynamics',title:'Hemodynamically stable?',
+    choices:[{text:'Hypotension\nSBP < 5th %tile',cls:'red',next:'r-hypo'},{text:'Stable\nBP ปกติ',cls:'green',next:'r-stable'}]},
+  {id:'r-hypo',type:'drug',tag:'Hypotension',title:'IV/IO fluid + Vasoactive drugs',sub:'NSS 10–20 mL/kg bolus · reassess\nEpi 0.1–1 · Dopamine 5–20 · Norepi 0.1–2 mcg/kg/min',next:'r-temp'},
+  {id:'r-stable',type:'action',tag:'Monitoring',title:'12-lead ECG + Continuous monitoring',sub:'Monitor: BP, SpO₂, EtCO₂, temperature, glucose',next:'r-temp'},
+  {id:'r-temp',type:'action',tag:'Temperature',title:'Targeted Temperature Management (TTM)',sub:'Comatose: TTM 32–36°C\nAvoid fever > 37.5°C · Continuous temperature monitoring',next:'r-glu'},
+  {id:'r-glu',type:'drug',tag:'Glucose',title:'Normoglycemia',sub:'Target 70–180 mg/dL\nHypoglycemia: D10W 2 mL/kg (neonate) / D25W 2 mL/kg (child)',next:'r-neuro'},
+  {id:'r-neuro',type:'action',tag:'Neuro',title:'Neuroprotection',sub:'Normoglycemia · Normocapnia · Normothermia/TTM · Seizure monitoring + treatment',next:'r-end'},
+  {id:'r-end',type:'end-good',tag:'สุดท้าย',title:'Refer PICU + ค้นหาสาเหตุ',sub:'Transfer to PICU · หาและรักษา precipitating cause · Family communication',isEnd:true},
+]};
+
+function linearCardHTML(s,active){
+  const choicesHTML=s.isChoice&&active?`<div class="choices">${s.choices.map(c=>`<div class="choice ${c.cls}" id="lch-${s.id}-${c.next}" onclick="chooseLinear('${s.id}','${c.next}')">${c.text.replace(/\n/g,'<br>')}</div>`).join('')}</div>`:'';
+  const nextHTML=!s.isChoice&&active&&!s.isEnd?`<button class="next-btn" id="lnb-${s.id}" onclick="nextLinear('${s.id}','${s.next}')">ถัดไป →</button>`:'';
+  const restartHTML=active&&s.isEnd?`<button class="restart-btn" onclick="loadAlgo(curAlgo,document.querySelector('.ab.active'))">↺ เริ่มใหม่</button>`:'';
+  const type=s.isChoice?'':s.type||'action';
+  if(s.isChoice)return`<div class="card" style="border-color:#BA7517;background:#FAEEDA"><div class="c-tag" style="color:#854F0B">${s.tag}</div><div class="c-title" style="color:#412402">${s.title}</div>${s.sub?`<div class="c-sub" style="color:#633806">${s.sub.replace(/\n/g,'<br>')}</div>`:''}${choicesHTML}</div>`;
+  return`<div class="card ${type}"><div class="c-tag">${s.tag||''}</div><div class="c-title">${s.title}</div>${s.sub?`<div class="c-sub">${s.sub.replace(/\n/g,'<br>')}</div>`:''}${nextHTML}${restartHTML}</div>`;
+}
+function getLinearStep(id){return LINEAR[curAlgo].find(s=>s.id===id);}
+function nextLinear(stepId,nextId){
+  const nb=document.getElementById('lnb-'+stepId);if(nb)nb.remove();
+  let next;
+  if(nextId&&nextId!=='undefined')next=getLinearStep(nextId);
+  else{const idx=LINEAR[curAlgo].findIndex(s=>s.id===stepId);next=LINEAR[curAlgo][idx+1];}
+  if(next)appendStep({...next,isLinear:true},true);
+}
+function chooseLinear(stepId,nextId){
+  document.querySelectorAll(`[id^="lch-${stepId}-"]`).forEach(el=>el.classList.add('faded'));
+  const next=getLinearStep(nextId);
+  if(next)appendStep({...next,isLinear:true},true);
+}
+</script>
+<script>
+/* ═══════════ SHARED RENDER ENGINE ═══════════ */
+function cardHTML(s,active){
+  if(s.isLinear)return linearCardHTML(s,active);
+  if(s.isLoop)return `<div>${s.loopHTML}</div>`+(active?`<button class="next-btn" id="nb-${s.id}" onclick="nextCard('${s.id}')">ถัดไป →</button>`:'');
+  if(s.isRhythm)return rhythmCardHTML(s.id);
+  const nextHTML=active&&s.type!=='end-good'?`<button class="next-btn" id="nb-${s.id}" onclick="nextCard('${s.id}')">ถัดไป →</button>`:'';
+  const restartHTML=active&&s.type==='end-good'?`<button class="restart-btn" onclick="loadAlgo('arrest',document.querySelectorAll('.ab')[0])">↺ เริ่มใหม่</button>`:'';
+  return`<div class="card ${s.type||'action'}"><div class="c-tag">${s.tag||''}</div><div class="c-title">${s.title}</div>${s.sub?`<div class="c-sub">${s.sub.replace(/\n/g,'<br>')}</div>`:''}${s.divider?`<hr class="c-divider"><div class="c-title" style="font-size:13px">${s.title2}</div><div class="c-sub">${s.sub2.replace(/\n/g,'<br>')}</div>`:''}${nextHTML}${restartHTML}</div>`;
+}
+function appendStep(s,active=true){
+  const container=document.getElementById('algo-steps');
+  if(shownSteps.length>0){const l=document.createElement('div');l.className='conn-line';l.innerHTML='<span></span>';container.appendChild(l);}
+  const wrap=document.createElement('div');wrap.className='step-wrap';wrap.id='wrap-'+s.id;
+  if(s.isLoop)s.loopHTML=s.loopBuilder();
+  wrap.innerHTML=cardHTML(s,active);
+  container.appendChild(wrap);shownSteps.push(s);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>wrap.classList.add('visible')));
+  setTimeout(()=>wrap.scrollIntoView({behavior:'smooth',block:'nearest'}),200);
+}
+function nextCard(stepId){const nb=document.getElementById('nb-'+stepId);if(nb)nb.remove();if(pendingQueue.length>0)appendStep(pendingQueue.shift(),true);}
+
+/* ═══════════ LOAD ALGORITHM DISPATCHER ═══════════ */
+function loadAlgo(name,el){
+  document.querySelectorAll('.ab').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  curAlgo=name;
+  // reset all
+  if(epiTimerInt)clearInterval(epiTimerInt);if(cprInt)clearInterval(cprInt);
+  epiTimerInt=null;cprInt=null;epiCount=0;amioCount=0;htShown=false;cycle=0;
+  shownSteps=[];pendingQueue=[];
+  document.getElementById('algo-steps').innerHTML='';
+  const resusBar=document.getElementById('resus-bar');
+  const epiBar=document.getElementById('epi-bar-wrap');
+  if(name==='arrest'){
+    resusBar.style.display='flex';epiBar.style.display='block';
+    resetMainTimer();
+    document.getElementById('cycle-count').textContent='0';
+    document.getElementById('epi-val').textContent='ยังไม่ได้ให้';
+    document.getElementById('dp-epi').className='drug-pill dp-epi';
+    startArrest();
+  } else {
+    resusBar.style.display='none';epiBar.style.display='none';
+    startLinear(name);
+  }
+}
+function startArrest(){
+  appendStep({id:'s0',type:'start',tag:'จุดเริ่มต้น',title:'เด็กหมดสติ — ไม่หายใจ / เฮือก',sub:'Unresponsive · Absent or only gasping respirations'},true);
+  pendingQueue=[
+    {id:'s1',type:'start',tag:'เริ่มทันที',title:'Activate EMS · CPR · AED/Defibrillator',sub:'Shout for help · ส่งคนไป activate EMS ขณะ CPR',divider:true,title2:'High-quality CPR',sub2:'100–120/min · ≥⅓ AP depth · Full recoil · Min interruptions · สลับ compressor ทุก 2 นาที'},
+    {id:'r0',isRhythm:true},
+  ];
+}
+function startLinear(name){
+  const first=LINEAR[name][0];
+  appendStep({...first,isLinear:true},true);
+}
+</script>
+<script>
+/* ═══════════ DRUG DOSES ═══════════ */
+function doseHTML(wt){
+  const epi=rc(clamp(wt*.01,.001,1),3),epiml=rc(clamp(wt*.1,.1,10),1);
+  const amio=rc(clamp(wt*5,5,300));const a1=rc(clamp(wt*.1,.1,6),1),a2=rc(clamp(wt*.2,.2,12),1);
+  const atro=rc(clamp(wt*.02,.1,.5),2);const bicarb=rc(clamp(wt,1,50));
+  const cacl=rc(clamp(wt*20,20,2000)),caclml=rc(clamp(wt*.2,.2,20),1);
+  const mg=rc(clamp(wt*25,25,2000)),mgml=rc(clamp(wt*.5,.5,40),1);
+  const fl=rc(clamp(wt*20,20,1000));const d10=rc(clamp(wt*2,2,20),1),d25=rc(clamp(wt*2,2,25),1);
+  const df1=rc(clamp(wt*2,2,200)),df2=rc(clamp(wt*4,4,200));const cv1=rc(clamp(wt*.5,.5,50),1),cv2=rc(clamp(wt*1,1,100),1);
+  return`<div class="sec-label">⚡ Defibrillation / Cardioversion</div><div class="grid">
+  <div class="dc dc-red"><div class="dc-cat">VF/pVT 1st</div><div class="dc-name">Defibrillation</div><div class="dc-val">${df1} J</div><div class="dc-note">2 J/kg</div></div>
+  <div class="dc dc-red"><div class="dc-cat">VF/pVT 2nd+</div><div class="dc-name">Defibrillation</div><div class="dc-val">${df2} J</div><div class="dc-note">4 J/kg · max 200 J</div></div>
+  <div class="dc dc-amber"><div class="dc-cat">Cardioversion 1st</div><div class="dc-name">Synchronized</div><div class="dc-val">${cv1} J</div><div class="dc-note">0.5 J/kg</div></div>
+  <div class="dc dc-amber"><div class="dc-cat">Cardioversion 2nd</div><div class="dc-name">Synchronized</div><div class="dc-val">${cv2} J</div><div class="dc-note">1–2 J/kg</div></div></div>
+  <div class="sec-label">💊 Cardiac Arrest</div><div class="grid">
+  <div class="dc"><div class="dc-cat">Vasopressor</div><div class="dc-name">Epinephrine</div><div class="dc-val">${epi} mg</div><div class="dc-unit">= ${epiml} mL of 1:10,000</div><div class="dc-note">0.01 mg/kg IV/IO · ทุก 3–5 นาที · max 1 mg</div></div>
+  <div class="dc"><div class="dc-cat">Antiarrhythmic</div><div class="dc-name">Amiodarone</div><div class="dc-val">${amio} mg</div><div class="dc-unit">bolus IV/IO</div><div class="dc-note">5 mg/kg · max 300 mg · repeat ×2</div></div></div>
+  <div class="sec-label">🫀 Antiarrhythmic</div><div class="grid">
+  <div class="dc dc-teal"><div class="dc-cat">SVT 1st</div><div class="dc-name">Adenosine</div><div class="dc-val">${a1} mg</div><div class="dc-unit">rapid IV push</div><div class="dc-note">0.1 mg/kg · max 6 mg · flush NS</div></div>
+  <div class="dc dc-teal"><div class="dc-cat">SVT 2nd</div><div class="dc-name">Adenosine</div><div class="dc-val">${a2} mg</div><div class="dc-unit">rapid IV push</div><div class="dc-note">0.2 mg/kg · max 12 mg</div></div>
+  <div class="dc dc-purple"><div class="dc-cat">Bradycardia</div><div class="dc-name">Atropine</div><div class="dc-val">${atro} mg</div><div class="dc-unit">IV/IO</div><div class="dc-note">0.02 mg/kg · min 0.1 · max 0.5 mg</div></div></div>
+  <div class="sec-label">🧪 Support</div><div class="grid">
+  <div class="dc dc-green"><div class="dc-cat">IV Fluid</div><div class="dc-name">NSS/LRS bolus</div><div class="dc-val">${fl} mL</div><div class="dc-note">20 mL/kg · push 5–20 min</div></div>
+  <div class="dc"><div class="dc-cat">Metabolic</div><div class="dc-name">NaHCO₃</div><div class="dc-val">${bicarb} mEq</div><div class="dc-note">1 mEq/kg slow IV · max 50</div></div>
+  <div class="dc"><div class="dc-cat">Electrolyte</div><div class="dc-name">CaCl₂ 10%</div><div class="dc-val">${cacl} mg</div><div class="dc-unit">= ${caclml} mL</div><div class="dc-note">20 mg/kg slow · max 2 g</div></div>
+  <div class="dc"><div class="dc-cat">Electrolyte</div><div class="dc-name">MgSO₄ 50%</div><div class="dc-val">${mg} mg</div><div class="dc-unit">= ${mgml} mL</div><div class="dc-note">25 mg/kg over 10–20 min</div></div>
+  <div class="dc dc-green"><div class="dc-cat">Hypoglycemia neo</div><div class="dc-name">D10W</div><div class="dc-val">${d10} mL</div><div class="dc-note">2 mL/kg IV</div></div>
+  <div class="dc dc-green"><div class="dc-cat">Hypoglycemia child</div><div class="dc-name">D25W</div><div class="dc-val">${d25} mL</div><div class="dc-note">2 mL/kg IV · max 25</div></div></div>`;
+}
+function computeDose(src){
+  let wt;
+  if(src==='wt'){wt=parseFloat(document.getElementById('cw').value);if(!wt||wt<=0){document.getElementById('cr-wt').innerHTML='<div class="empty">ใส่น้ำหนัก kg</div>';document.getElementById('ci-wt').style.display='none';return;}document.getElementById('ci-wt').style.display='block';document.getElementById('ci-wt').innerHTML=`น้ำหนักจริง: <strong>${rc(wt,1)} kg</strong>`;document.getElementById('cr-wt').innerHTML=doseHTML(wt);}
+  else{const av=parseFloat(document.getElementById('ca').value);const au=document.getElementById('cu').value;if(!av||av<0){document.getElementById('cr-age').innerHTML='<div class="empty">ใส่อายุ</div>';document.getElementById('ci-age').style.display='none';return;}const mo=au==='yr'?av*12:av;wt=rc(estWt(mo),1);const a=au==='yr'?`${av} ปี`:`${av} เดือน`;document.getElementById('ci-age').style.display='block';document.getElementById('ci-age').innerHTML=`อายุ <strong>${a}</strong> → น้ำหนัก <strong>${wt} kg</strong>`;document.getElementById('cr-age').innerHTML=doseHTML(wt);}
+}
+/* ═══════════ ETT ═══════════ */
+function ettHTML(wt,ageYr){
+  const neo=ageYr<0.08,inf=ageYr<1;let unc,cuf,dep,blade,lma;
+  if(neo){unc=3.0;cuf='N/A';dep=rc(wt+6,1);blade='Miller 0';lma='N/A';}
+  else if(inf){unc=3.5;cuf='3.0';dep=rc(wt+6,1);blade='Miller 1';lma='1';}
+  else{unc=rc(ageYr/4+4,1);cuf=rc(ageYr/4+3,1);dep=rc(unc*3,1);const bn=ageYr<3?1:2;blade=`Miller ${bn} / Mac ${bn}`;lma=ageYr<5?'1.5':ageYr<10?'2':'2.5';}
+  const rr=ageYr<1?'25–30':ageYr<8?'20–25':'15–20';
+  return`<div class="sec-label">🫁 ETT Size</div><div class="grid">
+  <div class="dc"><div class="dc-cat">Uncuffed</div><div class="dc-name">ETT size</div><div class="dc-val" style="color:#0C447C">${unc} mm</div><div class="dc-note">(age/4)+4</div></div>
+  <div class="dc"><div class="dc-cat">Cuffed (preferred)</div><div class="dc-name">ETT size</div><div class="dc-val">${cuf} mm</div><div class="dc-note">(age/4)+3 · AHA 2020</div></div>
+  <div class="dc dc-teal"><div class="dc-cat">Oral depth at lip</div><div class="dc-name">Insertion</div><div class="dc-val">${dep} cm</div><div class="dc-note">ETT×3 หรือ kg+6</div></div>
+  <div class="dc dc-purple"><div class="dc-cat">LMA</div><div class="dc-name">Size</div><div class="dc-val">${lma}</div></div></div>
+  <div class="sec-label">🩺 Laryngoscope / Ventilation</div><div class="grid">
+  <div class="dc dc-amber"><div class="dc-cat">Blade</div><div class="dc-name">Laryngoscope</div><div class="dc-val" style="font-size:14px">${blade}</div></div>
+  <div class="dc dc-green"><div class="dc-cat">Tidal volume</div><div class="dc-name">6–8 mL/kg</div><div class="dc-val">${rc(wt*6)}–${rc(wt*8)} mL</div></div>
+  <div class="dc dc-green"><div class="dc-cat">RR (invasive)</div><div class="dc-name">Target</div><div class="dc-val" style="font-size:15px">${rr}/min</div></div>
+  <div class="dc"><div class="dc-cat">Post-ROSC EtCO₂</div><div class="dc-name">Target</div><div class="dc-val">35–40 mmHg</div></div></div>`;
+}
+function computeETT(src){
+  let wt,ageYr,iE,rE;
+  if(src==='wt'){wt=parseFloat(document.getElementById('ew').value);iE=document.getElementById('ei-wt');rE=document.getElementById('er-wt');if(!wt||wt<=0){rE.innerHTML='<div class="empty">ใส่น้ำหนัก kg</div>';iE.style.display='none';return;}ageYr=Math.max(0,wt<10?wt/2-1:(wt-7)/3);iE.style.display='block';iE.innerHTML=`น้ำหนัก <strong>${rc(wt,1)} kg</strong> → อายุประมาณ <strong>${rc(ageYr,1)} ปี</strong>`;rE.innerHTML=ettHTML(wt,ageYr);}
+  else{const av=parseFloat(document.getElementById('ea').value);const au=document.getElementById('eu').value;iE=document.getElementById('ei-age');rE=document.getElementById('er-age');if(!av||av<0){rE.innerHTML='<div class="empty">ใส่อายุ</div>';iE.style.display='none';return;}const mo=au==='yr'?av*12:av;wt=rc(estWt(mo),1);ageYr=mo/12;const a=au==='yr'?`${av} ปี`:`${av} เดือน`;iE.style.display='block';iE.innerHTML=`อายุ <strong>${a}</strong> → น้ำหนัก <strong>${wt} kg</strong>`;rE.innerHTML=ettHTML(wt,ageYr);}
+}
+/* ═══════════ DRIP ═══════════ */
+function computeDrip(){
+  const wt=parseFloat(document.getElementById('dw').value);const res=document.getElementById('dr-res');
+  if(!wt||wt<=0){res.innerHTML='<div class="empty">ใส่น้ำหนัก kg</div>';return;}
+  function dc(name,cat,col,ranges,note){return`<div class="drip-card"><div class="drip-hdr"><span class="drip-name">${name}</span><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#f5f5f3;color:#888">${cat}</span></div><div class="drip-grid">${ranges.map(([l,v])=>`<div class="drip-d"><div class="drip-dlbl">${l}</div><div class="drip-dval" style="color:${col}">${v}</div><div class="drip-dunit">mL/hr</div></div>`).join('')}</div><div class="drip-note">${note}</div></div>`;}
+  const ep=d=>rc(d*60/6,2);const dp=d=>rc(d,2);const mi=d=>rc(d*wt,2);const mo=d=>rc(d*wt/0.1,2);
+  res.innerHTML=`<p style="font-size:12px;color:#aaa;margin-bottom:1rem">น้ำหนัก <strong style="color:#185FA5">${rc(wt,1)} kg</strong></p>
+${dc('Epinephrine','Vasopressor','#A32D2D',[['0.05',ep(.05)],['0.1',ep(.1)],['0.3',ep(.3)],['1.0 mcg/kg/min',ep(1)]],'Std: <strong>0.3 mg/kg</strong> in 50 mL → 1 mL/hr = 0.1 mcg/kg/min')}
+${dc('Dopamine','Vasopressor','#854F0B',[['5',dp(5)],['10',dp(10)],['15',dp(15)],['20 mcg/kg/min',dp(20)]],'Std: <strong>3 mg/kg</strong> in 50 mL → 1 mL/hr = 1 mcg/kg/min')}
+${dc('Dobutamine','Inotrope','#185FA5',[['5',dp(5)],['10',dp(10)],['15',dp(15)],['20 mcg/kg/min',dp(20)]],'Std: <strong>3 mg/kg</strong> in 50 mL → 1 mL/hr = 1 mcg/kg/min')}
+${dc('Norepinephrine','Vasopressor','#534AB7',[['0.05',ep(.05)],['0.1',ep(.1)],['0.3',ep(.3)],['1.0 mcg/kg/min',ep(1)]],'Std: <strong>0.3 mg/kg</strong> in 50 mL → 1 mL/hr = 0.1 mcg/kg/min')}
+${dc('Midazolam','Sedation','#0F6E56',[['0.05',mi(.05)],['0.1',mi(.1)],['0.2',mi(.2)],['0.3 mg/kg/hr',mi(.3)]],'Std: 1 mg/mL · ระวัง respiratory depression')}
+${dc('Morphine','Analgesia','#3B6D11',[['0.01',rc(mo(.01),1)],['0.02',rc(mo(.02),1)],['0.04',rc(mo(.04),1)],['0.06 mg/kg/hr',rc(mo(.06),1)]],'Std: 0.1 mg/mL · ระวัง respiratory depression')}`;
+}
+</script>
+<script>
+/* ═══════════ BROSELOW ═══════════ */
+const bands=[
+  {name:'Grey',wt:'3–5 kg',min:3,max:5.9,col:'#9E9E9E',ett:'3.0–3.5',defib:'6–10 J',epi:'0.03–0.05 mg',fl:'60–100 mL'},
+  {name:'Pink',wt:'6–7 kg',min:6,max:7.9,col:'#F06292',ett:'3.5',defib:'12–14 J',epi:'0.06–0.07 mg',fl:'120–140 mL'},
+  {name:'Red',wt:'8–9 kg',min:8,max:9.9,col:'#EF5350',ett:'3.5',defib:'16–18 J',epi:'0.08–0.09 mg',fl:'160–180 mL'},
+  {name:'Purple',wt:'10–11 kg',min:10,max:11.9,col:'#9C27B0',ett:'3.5–4.0',defib:'20–22 J',epi:'0.10–0.11 mg',fl:'200–220 mL'},
+  {name:'Yellow',wt:'12–14 kg',min:12,max:14.9,col:'#D4A017',ett:'4.0',defib:'24–28 J',epi:'0.12–0.14 mg',fl:'240–280 mL'},
+  {name:'White',wt:'15–18 kg',min:15,max:18.9,col:'#B0BEC5',ett:'4.5',defib:'30–36 J',epi:'0.15–0.18 mg',fl:'300–360 mL'},
+  {name:'Blue',wt:'19–23 kg',min:19,max:23.9,col:'#1976D2',ett:'5.0',defib:'38–46 J',epi:'0.19–0.23 mg',fl:'380–460 mL'},
+  {name:'Orange',wt:'24–29 kg',min:24,max:29.9,col:'#F57C00',ett:'5.5',defib:'48–58 J',epi:'0.24–0.29 mg',fl:'480–580 mL'},
+  {name:'Green',wt:'30–36 kg',min:30,max:36,col:'#388E3C',ett:'6.0 cuffed',defib:'60–72 J',epi:'0.30–0.36 mg',fl:'600–720 mL'},
+];
+function computeBrose(){
+  const wt=parseFloat(document.getElementById('bw').value)||null;const res=document.getElementById('br-res');
+  const active=wt?bands.findIndex(b=>wt>=b.min&&wt<=b.max):-1;
+  res.innerHTML=bands.map((b,i)=>{const isA=i===active,isDim=active!==-1&&!isA;
+    return`<div class="brose-row${isA?' active-band':''}${isDim?' dim':''}"><div class="brose-color" style="background:${b.col}"></div><div style="flex:1"><div style="font-weight:600;font-size:13px">${b.name} <span style="font-size:12px;font-weight:400;color:#888">${b.wt}</span>${isA?`<span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#185FA5;color:#fff;margin-left:6px">✓ ${rc(wt,1)} kg</span>`:''}</div><div class="brose-details"><span>ETT ${b.ett}</span><span>Defib ${b.defib}</span><span>Epi ${b.epi}</span><span>Fluid ${b.fl}</span></div></div></div>`;
+  }).join('');
+}
+/* ═══════════ QUIZ ═══════════ */
+const QS=[
+  {q:"เด็กหมดสติ ไม่หายใจ ขั้นตอนแรกหลัง confirm unresponsive คืออะไร?",opts:["เริ่ม CPR ทันที","Activate EMS และเริ่ม CPR","ใส่ IV access","เปิด airway และ give 2 breaths"],ans:1,exp:"ต้อง activate EMS พร้อมกับเริ่ม CPR — AHA 2020 เน้น minimize time to first compression"},
+  {q:"Epinephrine dose สำหรับ cardiac arrest ใน pediatric คือ?",opts:["0.1 mg/kg IV","0.01 mg/kg IV/IO","0.1 mL/kg of 1:1000","1 mg flat dose"],ans:1,exp:"0.01 mg/kg IV/IO = 0.1 mL/kg of 1:10,000 · Max 1 mg · ให้ทุก 3–5 นาที"},
+  {q:"พบ VF ใน monitor ขั้นตอนถัดจาก confirm rhythm คืออะไร?",opts:["ให้ Epinephrine ก่อน","Shock 2 J/kg ทันที","CPR 2 นาทีก่อน shock","ให้ Amiodarone ก่อน"],ans:1,exp:"VF/pVT = shockable → shock 2 J/kg ทันที → CPR 2 min → check rhythm → Epi → Amio"},
+  {q:"Adenosine first dose ใน SVT คือ?",opts:["0.2 mg/kg max 12 mg","0.1 mg/kg max 6 mg","0.01 mg/kg max 1 mg","0.5 mg/kg max 6 mg"],ans:1,exp:"First: 0.1 mg/kg (max 6 mg) · Second: 0.2 mg/kg (max 12 mg) · Push RAPID + flush NS ทันที"},
+  {q:"Atropine minimum dose ใน pediatric bradycardia?",opts:["0.01 mg","0.05 mg","0.1 mg","0.5 mg"],ans:2,exp:"Min 0.1 mg — ต่ำกว่านี้อาจเกิด paradoxical bradycardia จาก central vagal stimulation"},
+  {q:"Post-ROSC target SpO₂ ตาม AHA 2020?",opts:["SpO₂ > 99%","SpO₂ 94–99%","SpO₂ > 90%","SpO₂ 90–95%"],ans:1,exp:"Target 94–99% · หลีกเลี่ยง hyperoxia เพราะเพิ่ม oxidative injury post-ROSC"},
+  {q:"H's & T's ข้อใดไม่ใช่ reversible cause ของ cardiac arrest?",opts:["Hypovolemia","Tension pneumothorax","Hypertension","Tamponade"],ans:2,exp:"Hypertension ไม่อยู่ใน H's & T's · H's = Hypoxia, Hypovolemia, Hypo/Hyperkalemia, Hypothermia"},
+  {q:"เด็ก 2 ปี HR 180 ง่วงซึม CRT 4 วิ BP ต่ำ QRS narrow regular — ทำอย่างไร?",opts:["Adenosine 0.1 mg/kg","Synchronized cardioversion 0.5 J/kg","Amiodarone 5 mg/kg over 60 min","Vagal maneuver แล้วรอ"],ans:1,exp:"SVT + unstable → Synchronized cardioversion 0.5–1 J/kg ไม่รอลองยา"},
+  {q:"Amiodarone dose ใน VF/pVT คือ?",opts:["1 mg/kg bolus","5 mg/kg bolus max 300 mg","5 mg/kg over 60 min","10 mg/kg bolus"],ans:1,exp:"Cardiac arrest: 5 mg/kg IV/IO bolus (max 300 mg) · Stable: 5 mg/kg over 20–60 min"},
+  {q:"Post-ROSC TTM target temperature?",opts:["32–36°C","36–37.5°C","28–32°C","37–38°C"],ans:0,exp:"TTM: 32–36°C สำหรับ comatose post-ROSC · Avoid fever >37.5°C"}
+];
+let qCur=0,qScore=0;
+function renderQ(){
+  const q=QS[qCur];const pct=Math.round(qCur/QS.length*100);
+  document.getElementById('quiz-container').innerHTML=`<p class="q-prog">ข้อ ${qCur+1} / ${QS.length}</p><div class="q-bar"><div class="q-fill" style="width:${pct}%"></div></div><p class="q-text">${q.q}</p><div class="q-opts">${q.opts.map((o,i)=>`<div class="q-opt" id="qo${i}" onclick="selQ(${i})">${String.fromCharCode(65+i)}. ${o}</div>`).join('')}</div><div class="q-exp" id="qexp">${q.exp}</div><button class="q-next" id="qnext" onclick="nextQ()">${qCur===QS.length-1?'ดูผล':'ข้อถัดไป →'}</button>`;
+  window._qa=false;
+}
+function selQ(i){if(window._qa)return;window._qa=true;const ans=QS[qCur].ans;document.querySelectorAll('.q-opt').forEach(o=>o.classList.add('disabled'));document.getElementById('qo'+i).classList.add(i===ans?'correct':'wrong');if(i!==ans)document.getElementById('qo'+ans).classList.add('correct');if(i===ans)qScore++;document.getElementById('qexp').style.display='block';document.getElementById('qnext').style.display='inline-block';}
+function nextQ(){qCur++;if(qCur>=QS.length){const pct=Math.round(qScore/QS.length*100);const msg=pct>=80?'ยอดเยี่ยม! 💪':pct>=60?'ดีมาก ทบทวนอีกนิด':'ลองทบทวนอีกครั้ง';document.getElementById('quiz-container').innerHTML=`<div class="q-result"><p style="font-size:13px;color:#888">ผลการทดสอบ</p><div class="q-score">${qScore}/${QS.length}</div><p style="font-size:13px;color:#888">${pct}% · ${msg}</p><br><button class="q-restart" onclick="qCur=0;qScore=0;renderQ()">↺ ทำใหม่</button></div>`;return;}renderQ();}
+
+/* ═══════════ INIT ═══════════ */
+loadAlgo('arrest',document.querySelectorAll('.ab')[0]);
+computeBrose();
+</script>
+</body>
+</html>
